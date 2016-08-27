@@ -43,8 +43,6 @@ const generate = () => {
 program
   .version('0.0.1')
   .command('generate')
-    .action(generate)
-  .command('g')
     .action(generate);
 
 program.parse(process.argv);

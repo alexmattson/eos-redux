@@ -5,7 +5,7 @@
 
 ## How to install:
 
-Install the npm package through the command line
+Install the npm package
 
 ```
 npm install --save eos-redux
@@ -16,7 +16,7 @@ add the following code to your package.json file
     "eos": "node_modules/eos-redux/index.js"
   },
 ```
-You're all set.
+You're all set!
 
 ## How to use:
 
@@ -31,9 +31,6 @@ eos <command>
 eos generate
 ```
 
-```
-eos g
-```
 This is used to create the basic file structure for a redux application.
 
 ```
@@ -47,8 +44,24 @@ frontend
   + store
   	store.js
   + util
-  todo_redux.jsx
+  index.jsx
 ```
+Along with the creation of the file structure comes the instillation of all dependencies needed.
+
+All the first level dependencies included are:
+
+* babel-loader
+* babel-core
+* babel-preset-es2015
+* babel-preset-react
+* lodash
+* react-redux
+* react
+* react-dom
+* react-router
+* redux
+* webpack
+
 
 ---
 Developed by [Alex Mattson](http://www.alexmattson.com)
