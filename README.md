@@ -47,7 +47,7 @@ frontend
   + store
   	store.js
   + util
-  todo_redux.jsx
+  index.jsx
 ```
 
 ---
