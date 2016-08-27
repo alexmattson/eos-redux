@@ -16,6 +16,10 @@ add the following code to your package.json file
     "eos": "node_modules/eos-redux/index.js"
   },
 ```
+finally link the eos command by running
+```
+npm link
+```
 You're all set!
 
 ## How to use:
@@ -62,6 +66,7 @@ All the first level dependencies included are:
 * redux
 * webpack
 
+For ease of use we have also included a default webpack.config.js file that is structured correctly for this framework.  
 
 ---
 Developed by [Alex Mattson](http://www.alexmattson.com)
