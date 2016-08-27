@@ -29,10 +29,14 @@ All commands are run through the following syntax:
 eos <command>
 ```
 
-### Generate
+### Start
 
 ```
-eos generate
+eos start
+```
+Alternate syntax:
+```
+eos s
 ```
 
 This is used to create the basic file structure for a redux application.
@@ -41,6 +45,7 @@ This is used to create the basic file structure for a redux application.
 frontend
   + actions
   + components
+    root.jsx
   + middleware
   	master_middleware.js
   + reducers
@@ -67,6 +72,17 @@ All the first level dependencies included are:
 * webpack
 
 For ease of use we have also included a default webpack.config.js file that is structured correctly for this framework.  
+
+### Generate
+
+```
+eos generate [name]
+```
+Alternate syntax:
+```
+eos g [name]
+```
+
 
 ---
 Developed by [Alex Mattson](http://www.alexmattson.com)
