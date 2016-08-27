@@ -36,6 +36,7 @@ const generate = () => {
     createFile('store.js', 'frontend/store/');
   createDir('util', 'frontend/');
   createFile('index.jsx', 'frontend/');
+  createFile('webpack.config.js', './');
 };
 
 // PROGRAM //
