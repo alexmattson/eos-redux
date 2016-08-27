@@ -61,9 +61,19 @@ const start = () => {
 };
 
 const generate = (name) => {
+  // Actions
   generateFile(name, 'actions', 'js', 'frontend/actions/');
   setName(name, 'actions');
-  
+  // Middleware
+  generateFile(name, 'middleware', 'js', 'frontend/middleware/');
+  setName(name, 'actions');
+  // Reducer
+  // Util
+
+  // Component
+  // createDir('reducers', 'frontend/');
+  // generateComponent(name, 'component', 'js', 'frontend/actions/');
+  // setName(name, 'actions');
 }
 
 
