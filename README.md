@@ -49,8 +49,21 @@ frontend
   + util
   index.jsx
 ```
-Along with the instillation of all dependencies needed. A list of the all the
-first level dependencies include:
+Along with the creation of the file structure comes the instillation of all dependencies needed.
+
+All the first level dependencies included are:
+
+* babel-loader
+* babel-core
+* babel-preset-es2015
+* babel-preset-react
+* lodash
+* react-redux
+* react
+* react-dom
+* react-router
+* redux
+* webpack
 
 
 ---
