@@ -5,7 +5,7 @@
 
 ## How to install:
 
-Install the npm package through the command line
+Install the npm package
 
 ```
 npm install --save eos-redux
@@ -16,7 +16,7 @@ add the following code to your package.json file
     "eos": "node_modules/eos-redux/index.js"
   },
 ```
-You're all set.
+You're all set!
 
 ## How to use:
 
@@ -49,6 +49,9 @@ frontend
   + util
   index.jsx
 ```
+Along with the instillation of all dependencies needed. A list of the all the
+first level dependencies include:
+
 
 ---
 Developed by [Alex Mattson](http://www.alexmattson.com)
