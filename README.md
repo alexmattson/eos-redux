@@ -1,6 +1,6 @@
 # Eos Redux
 
-[![eos.png](https://s10.postimg.org/7hfcpvwpl/eos.png)]
+![eos.png](https://s10.postimg.org/7hfcpvwpl/eos.png)
 
 
 ## How to install:
