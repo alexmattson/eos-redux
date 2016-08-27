@@ -28,6 +28,7 @@ const generate = () => {
   createDir('frontend');
   createDir('actions', 'frontend/');
   createDir('components', 'frontend/');
+    createFile('root.jsx', 'frontend/components/');
   createDir('middleware', 'frontend/');
     createFile('master_middleware.js', 'frontend/middleware/');
   createDir('reducers', 'frontend/');
