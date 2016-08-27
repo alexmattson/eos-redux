@@ -1,0 +1,22 @@
+{
+  "name": "eos-redux",
+  "version": "1.0.3",
+  "description": "Redux Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amattson21/eos-redux.git"
+  },
+  "author": "Alex Mattson <me@alexmattson.com>",
+  "license": "ISC",
+  "bin": {
+    "eos": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0"
+  }
+}
