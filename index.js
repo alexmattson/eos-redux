@@ -26,7 +26,7 @@ const createStartFile = (file, dir, destinationPath) => {
 //// Generate Helpers ////
 
 const generateFile = (name, file, type, destinationPath) => {
-  let currentPath = `node_modules/eos-redux/templates/cycle/template_${file}`
+  let currentPath = `node_modules/eos-redux/templates/cycle/template_${file}.${type}`
   // let currentPath = `templates/cycle/template_${file}.${type}`;
   let fileName = `${snake(name)}_${file}.${type}`;
   command = `cp ${currentPath} ${destinationPath}${fileName}`;
