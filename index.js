@@ -89,16 +89,16 @@ const start = () => {
   createDir('frontend');
   createDir('actions', 'frontend/');
   createDir('components', 'frontend/');
-    createStartFile('root.jsx', 'frontend/components/');
+    createStartFile('root.jsx', 'js', 'frontend/components/');
   createDir('middleware', 'frontend/');
-    createStartFile('master_middleware.js', 'frontend/middleware/');
+    createStartFile('master_middleware.js', 'js', 'frontend/middleware/');
   createDir('reducers', 'frontend/');
-    createStartFile('root_reducer.js', 'frontend/reducers/');
+    createStartFile('root_reducer.js', 'js', 'frontend/reducers/');
   createDir('store', 'frontend/');
-    createStartFile('store.js', 'frontend/store/');
+    createStartFile('store.js', 'js', 'frontend/store/');
   createDir('util', 'frontend/');
-  createStartFile('index.jsx', 'frontend/');
-  createStartFile('webpack.config.js', './');
+  createStartFile('index.jsx', 'js', 'frontend/');
+  createStartFile('webpack.config.js', 'js', './');
 };
 
 const generate = (name) => {
@@ -112,7 +112,7 @@ const generate = (name) => {
   generateFile(name, 'middleware', 'js', 'frontend/middleware/');
   setName(name, 'middleware');
   // Reducer
-  generateFile(name, 'reducer', 'js', 'frontend/reducer/');
+  generateFile(name, 'reducer', 'js', 'frontend/reducers/');
   setName(name, 'reducer');
   // Util
   generateFile(name, 'api_util', 'js', 'frontend/util/');
