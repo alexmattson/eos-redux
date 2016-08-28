@@ -3,7 +3,6 @@ import TemplateList from './template_list';
 // Actions
 import { requestTemplates,
          createTemplate,
-         toggleTemplate,
          destroyTemplate
        } from '../../actions/template_actions';
 import { allTemplates } from '../../reducers/selectors';

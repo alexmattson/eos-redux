@@ -47,11 +47,11 @@ frontend
   + components
     root.jsx
   + middleware
-  	master_middleware.js
+    master_middleware.js
   + reducers
-  	root_reducer.js
+    root_reducer.js
   + store
-  	store.js
+    store.js
   + util
   index.jsx
 ```
@@ -85,6 +85,7 @@ eos g [name]
 This command will generate a full redux cycle for a given name. The files that will be generated are as follows:
 
 * frontend/components/[name]/
+* frontend/components/[name]/[name].jsx
 * frontend/components/[name]/[name]_container.jsx
 * frontend/actions/[name]_actions.js
 * frontend/middleware/[name]_middleware.js
@@ -98,7 +99,7 @@ sampleName
 SampelName
 ```
 
-While this command will generate pre-filled files it will not place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively. This must be done manually. 
+While this command will generate pre-filled files it will not place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively. This must be done manually.
 
 ---
 Developed by [Alex Mattson](http://www.alexmattson.com)
