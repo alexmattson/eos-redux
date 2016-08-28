@@ -2,10 +2,12 @@
 
 const exec = require('child_process').exec;
 const chalk = require('chalk');
+const snake = require('to-snake-case');
 
 // HELPERS //
-
 let command = '';
+
+//// Start Helpers ////
 
 const createDir = (dir, path) => {
   path = path ? path : '';
@@ -21,10 +23,12 @@ const createStartFile = (file, dir, destinationPath) => {
   console.log(chalk.blue('created'), `${destinationPath}${file}`);
 };
 
+//// Generate Helpers ////
+
 const generateFile = (name, file, type, destinationPath) => {
   // let currentPath = `node_modules/eos-redux/templates/cycle/template_${file}`
-  let currentPath = `templates/cycle/template_${file}.${type}`
-  let fileName = `${name}_${file}.${type}`
+  let currentPath = `templates/cycle/template_${file}.${type}`;
+  let fileName = `${snake(name)}_${file}.${type}`;
   command = `cp ${currentPath} ${destinationPath}${fileName}`;
   exec(command);
   setName(name, file);
@@ -32,13 +36,50 @@ const generateFile = (name, file, type, destinationPath) => {
 };
 
 const setName = (name, file) => {
-  let uppercase = `find . -type f -name "*${name}_${file}*" -exec sed -i "" 's/TEMPLATE/${name.toUpperCase()}/g' {} +`
+  let find_file = `find . -type f -name "*${snake(name)}_${file}*"`
+
+  let uppercase = `${find_file} -exec sed -i "" 's/TEMPLATE/${snake(name).toUpperCase()}/g' {} +`
   exec(uppercase);
-  let lowercase = `find . -type f -name "*${name}_${file}*" -exec sed -i "" 's/template/${name.toLowerCase()}/g' {} +`
+  let lowercase = `${find_file} -exec sed -i "" 's/template/${snake(name).toLowerCase()}/g' {} +`
   exec(lowercase);
-  let kneelingcamelize = `find . -type f -name "*${name}_${file}*" -exec sed -i "" 's/temPlate/${kneelingCamelize(name)}/g' {} +`
+  let kneelingcamelize = `${find_file} -exec sed -i "" 's/temPlate/${kneelingCamelize(name)}/g' {} +`
   exec(kneelingcamelize);
-  let camelize = `find . -type f -name "*${name}_${file}*" -exec sed -i "" 's/Template/${Camelize(name)}/g' {} +`
+  let camelize = `${find_file} -exec sed -i "" 's/Template/${Camelize(name)}/g' {} +`
+  exec(camelize);
+}
+
+const generateComponent = (name) => {
+  createDir(snake(name), 'frontend/components/');
+
+  let currentPath = `templates/cycle/template.jsx`;
+  let destinationPath = `frontend/components/${snake(name)}/`
+  command = `cp ${currentPath} ${destinationPath}${snake(name)}.jsx`;
+  exec(command);
+  setComponentNames(name, false);
+
+  generateFile(name,
+               'container',
+               'jsx',
+               `frontend/components/${snake(name)}/`
+              );
+  setComponentNames(name, true);
+}
+
+const setComponentNames = (name, container) => {
+  let find_file;
+  if (container) {
+    find_file = `find . -type f -name "*${snake(name)}_container*"`
+  } else {
+    find_file = `find . -type f -name "*${snake(name)}.jsx*"`
+  }
+
+  let uppercase = `${find_file} -exec sed -i "" 's/TEMPLATE/${snake(name).toUpperCase()}/g' {} +`
+  exec(uppercase);
+  let lowercase = `${find_file} -exec sed -i "" 's/template/${snake(name).toLowerCase()}/g' {} +`
+  exec(lowercase);
+  let kneelingcamelize = `${find_file} -exec sed -i "" 's/temPlate/${kneelingCamelize(name)}/g' {} +`
+  exec(kneelingcamelize);
+  let camelize = `${find_file} -exec sed -i "" 's/Template/${Camelize(name)}/g' {} +`
   exec(camelize);
 }
 
@@ -61,19 +102,21 @@ const start = () => {
 };
 
 const generate = (name) => {
+  // Component
+  generateComponent(name);
+  setComponentNames(name, true);
   // Actions
   generateFile(name, 'actions', 'js', 'frontend/actions/');
   setName(name, 'actions');
   // Middleware
   generateFile(name, 'middleware', 'js', 'frontend/middleware/');
-  setName(name, 'actions');
+  setName(name, 'middleware');
   // Reducer
+  generateFile(name, 'reducer', 'js', 'frontend/reducer/');
+  setName(name, 'reducer');
   // Util
-
-  // Component
-  // createDir('reducers', 'frontend/');
-  // generateComponent(name, 'component', 'js', 'frontend/actions/');
-  // setName(name, 'actions');
+  generateFile(name, 'api_util', 'js', 'frontend/util/');
+  setName(name, 'api_util');
 }
 
 

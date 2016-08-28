@@ -82,7 +82,23 @@ Alternate syntax:
 ```
 eos g [name]
 ```
+This command will generate a full redux cycle for a given name. The files that will be generated are as follows:
 
+* frontend/components/[name]/
+* frontend/components/[name]/[name]_container.jsx
+* frontend/actions/[name]_actions.js
+* frontend/middleware/[name]_middleware.js
+* frontend/reducer/[name]_reducer.js
+* frontend/util/[name]_api_util.js
+
+It is important how you format your name if it is more than one word. Currently it is required that you enter the name in either if the following formats:
+
+```
+sampleName
+SampelName
+```
+
+While this command will generate pre-filled files it will not place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively. This must be done manually. 
 
 ---
 Developed by [Alex Mattson](http://www.alexmattson.com)
