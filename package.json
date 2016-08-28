@@ -1,6 +1,6 @@
 {
   "name": "eos-redux",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Redux Framework",
   "main": "index.js",
   "scripts": {

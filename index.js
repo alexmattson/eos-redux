@@ -16,8 +16,9 @@ const createDir = (dir, path) => {
   console.log(chalk.green('created'), `${path}${dir}/`);
 };
 
-const createStartFile = (file, dir, destinationPath) => {
-  let currentPath = `node_modules/eos-redux/templates/${dir}/${file}`
+const createStartFile = (file, destinationPath) => {
+  let currentPath = `node_modules/eos-redux/templates/start/${file}`
+  // let currentPath = `templates/start/${file}`;
   command = `cp ${currentPath} ${destinationPath}`;
   exec(command);
   console.log(chalk.blue('created'), `${destinationPath}${file}`);
@@ -89,16 +90,16 @@ const start = () => {
   createDir('frontend');
   createDir('actions', 'frontend/');
   createDir('components', 'frontend/');
-    createStartFile('root.jsx', 'js', 'frontend/components/');
+    createStartFile('root.jsx', 'frontend/components/');
   createDir('middleware', 'frontend/');
-    createStartFile('master_middleware.js', 'js', 'frontend/middleware/');
+    createStartFile('master_middleware.js', 'frontend/middleware/');
   createDir('reducers', 'frontend/');
-    createStartFile('root_reducer.js', 'js', 'frontend/reducers/');
+    createStartFile('root_reducer.js', 'frontend/reducers/');
   createDir('store', 'frontend/');
-    createStartFile('store.js', 'js', 'frontend/store/');
+    createStartFile('store.js', 'frontend/store/');
   createDir('util', 'frontend/');
-  createStartFile('index.jsx', 'js', 'frontend/');
-  createStartFile('webpack.config.js', 'js', './');
+  createStartFile('index.jsx', 'frontend/');
+  createStartFile('webpack.config.js', './');
 };
 
 const generate = (name) => {
