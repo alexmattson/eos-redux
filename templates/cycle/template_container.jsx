@@ -14,8 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   requestTemplates: () => dispatch(requestTemplates()),
-  createTemplate: template => dispatch(createTemplate(template)),
-  toggleTemplate: template => () =>	dispatch(toggleTemplate(template))
+  createTemplate: template => dispatch(createTemplate(template))
 });
 
 export default connect(

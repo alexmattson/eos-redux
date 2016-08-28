@@ -52,7 +52,8 @@ const setName = (name, file) => {
 const generateComponent = (name) => {
   createDir(snake(name), 'frontend/components/');
 
-  let currentPath = `templates/cycle/template.jsx`;
+  let currentPath = `node_modules/eos-redux/templates/cycle/template.jsx`;
+  // let currentPath = `templates/cycle/template.jsx`;
   let destinationPath = `frontend/components/${snake(name)}/`
   command = `cp ${currentPath} ${destinationPath}${snake(name)}.jsx`;
   exec(command);
