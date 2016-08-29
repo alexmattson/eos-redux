@@ -55,7 +55,7 @@ frontend
   + util
   index.jsx
 ```
-Along with the creation of the file structure comes the instillation of all dependencies needed.
+Along with the creation of the file structure comes the installation of all dependencies needed.
 
 All the first level dependencies included are:
 
@@ -92,11 +92,11 @@ This command will generate a full redux cycle for a given name. The files that w
 * frontend/reducer/[name]_reducer.js
 * frontend/util/[name]_api_util.js
 
-It is important how you format your name if it is more than one word. Currently it is required that you enter the name in either if the following formats:
+It is important how you format your name if it is more than one word. Currently it is required that you enter the name in one of the following formats:
 
 ```
 sampleName
-SampelName
+SampleName
 ```
 
 While this command will generate pre-filled files it will not place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively. This must be done manually.
