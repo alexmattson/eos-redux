@@ -1,32 +1,23 @@
-# Eos Redux
+# EOS Redux
 
 ![eos.png](https://s10.postimg.org/7hfcpvwpl/eos.png)
 
 
 ## How to install:
 
-Install the npm package
+Install EOS as a global npm package
 
 ```
-npm install --save eos-redux
+npm install -g eos-redux
 ```
-add the following code to your package.json file
-```
-"bin": {
-    "eos": "node_modules/eos-redux/index.js"
-  },
-```
-finally link the eos command by running
-```
-npm link
-```
+
 You're all set!
 
 ## How to use:
 
 All commands are run through the following syntax:
 ```
-eos <command>
+eos <command> [args]
 ```
 
 ### Start
@@ -42,17 +33,17 @@ eos s
 This is used to create the basic file structure for a redux application.
 
 ```
-frontend
-  + actions
-  + components
+frontend/
+  + actions/
+  + components/
     root.jsx
-  + middleware
+  + middleware/
     master_middleware.js
-  + reducers
+  + reducers/
     root_reducer.js
-  + store
+  + store/
     store.js
-  + util
+  + util/
   index.jsx
 ```
 Along with the creation of the file structure comes the installation of all dependencies needed.

@@ -17,7 +17,7 @@ const createDir = (dir, path) => {
 };
 
 const createStartFile = (file, destinationPath) => {
-  let currentPath = `node_modules/eos-redux/templates/start/${file}`
+  let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/start/${file}`
   // let currentPath = `templates/start/${file}`;
   command = `cp ${currentPath} ${destinationPath}`;
   exec(command);
@@ -27,7 +27,8 @@ const createStartFile = (file, destinationPath) => {
 //// Generate Helpers ////
 
 const generateFile = (name, file, type, destinationPath) => {
-  let currentPath = `node_modules/eos-redux/templates/cycle/template_${file}.${type}`
+  let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/cycle/template_${file}.${type}`
+  // let currentPath = `node_modules/eos-redux/templates/cycle/template_${file}.${type}`
   // let currentPath = `templates/cycle/template_${file}.${type}`;
   let fileName = `${snake(name)}_${file}.${type}`;
   command = `cp ${currentPath} ${destinationPath}${fileName}`;
@@ -52,7 +53,7 @@ const setName = (name, file) => {
 const generateComponent = (name) => {
   createDir(snake(name), 'frontend/components/');
 
-  let currentPath = `node_modules/eos-redux/templates/cycle/template.jsx`;
+  let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/cycle/template.jsx`;
   // let currentPath = `templates/cycle/template.jsx`;
   let destinationPath = `frontend/components/${snake(name)}/`
   command = `cp ${currentPath} ${destinationPath}${snake(name)}.jsx`;

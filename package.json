@@ -1,6 +1,6 @@
 {
   "name": "eos-redux",
-  "version": "1.2.9",
+  "version": "1.3",
   "description": "Redux Framework",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,9 @@
   },
   "author": "Alex Mattson <me@alexmattson.com>",
   "license": "ISC",
+  "preferGlobal": "true",
   "bin": {
-    "eos": "index.js"
+    "eos": "eos-cli.js"
   },
   "dependencies": {
     "babel-core": "^6.13.2",
