@@ -1,7 +1,4 @@
-/// Util
-const exec = require('child_process').exec;
-const chalk = require('chalk');
-const snake = require('to-snake-case');
+const Util = require('./util.js');
 
 //// Start Helpers ////
 let command = '';
@@ -9,16 +6,16 @@ let command = '';
 const createDir = (dir, path) => {
   path = path ? path : '';
   command = `mkdir ${path}${dir}`;
-  exec(command);
-  console.log(chalk.green('created'), `${path}${dir}/`);
+  Util.exec(command);
+  console.log(Util.chalk.green('created'), `${path}${dir}/`);
 };
 
 const createStartFile = (file, destinationPath) => {
   let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/start/${file}`;
   // let currentPath = `templates/start/${file}`;
   command = `cp ${currentPath} ${destinationPath}`;
-  exec(command);
-  console.log(chalk.blue('created'), `${destinationPath}${file}`);
+  Util.exec(command);
+  console.log(Util.chalk.blue('created'), `${destinationPath}${file}`);
 };
 
 // Export
