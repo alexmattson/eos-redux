@@ -1,4 +1,4 @@
-const Util = require('./util.js');
+const Util = require('../util/util.js');
 
 //// Start Helpers ////
 let command = '';
