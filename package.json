@@ -14,7 +14,7 @@
   "license": "ISC",
   "preferGlobal": "true",
   "bin": {
-    "eos": "eos-cli.js"
+    "eos": "eos-cli/eos-cli.js"
   },
   "dependencies": {
     "babel-core": "^6.13.2",
