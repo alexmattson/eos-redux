@@ -21,6 +21,10 @@ const start = (name) => {
   Start.createDir(`util`, `${name}/frontend/`);
   Start.createStartFile(`index.jsx`, `${name}/frontend/`);
   Start.createStartFile(`../webpack.config.js`, `${name}/`);
+  Start.createStartFile(`../package.json`, `${name}/`);
+
+  console.log('Installing dependencies. This Could take a few minutes.');
+  Util.exec(`cd ${name} && npm install`);
 };
 
 const generate = (action, name) => {
@@ -44,7 +48,7 @@ const generate = (action, name) => {
     // Reducer
     Generate.generateFile(name, 'reducer', 'js', './frontend/reducers/');
     Generate.setName(name, 'reducer');
-  } 
+  }
   if (action === 'api_util' || cycle) {
     // Util
     Generate.generateFile(name, 'api_util', 'js', './frontend/util/');

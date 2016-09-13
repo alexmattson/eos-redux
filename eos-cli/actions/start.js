@@ -17,6 +17,7 @@ const createStartFile = (file, destinationPath) => {
   console.log(Util.chalk.blue('created'), `${destinationPath}${file}`);
 };
 
+
 // Export
 
 let Start = {

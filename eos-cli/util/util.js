@@ -16,7 +16,6 @@ const Camelize = (str) => {
   }).replace(/\s+/g, '');
 };
 
-
 // Export
 
 let Util = {
