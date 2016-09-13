@@ -6,8 +6,6 @@ let command = '';
 
 const generateFile = (name, file, type, destinationPath) => {
   let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/cycle/template_${file}.${type}`;
-  // let currentPath = `node_modules/eos-redux/templates/cycle/template_${file}.${type}`
-  // let currentPath = `templates/cycle/template_${file}.${type}`;
   let fileName = `${Util.snake(name)}_${file}.${type}`;
   command = `cp ${currentPath} ${destinationPath}${fileName}`;
   Util.exec(command);
@@ -32,7 +30,6 @@ const generateComponent = (name) => {
   Start.createDir(Util.snake(name), 'frontend/components/');
 
   let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/cycle/template.jsx`;
-  // let currentPath = `templates/cycle/template.jsx`;
   let destinationPath = `frontend/components/${Util.snake(name)}/`;
   command = `cp ${currentPath} ${destinationPath}${Util.snake(name)}.jsx`;
   Util.exec(command);

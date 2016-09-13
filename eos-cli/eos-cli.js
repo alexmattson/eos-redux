@@ -10,15 +10,15 @@ const program = require('commander');
 
 program
   .version('0.0.1')
-  .arguments('<cmd> [env]')
-  .action(function (cmd, env) {
+  .arguments('<cmd> [env1] [env2]')
+  .action(function (cmd, env1, env2) {
     // Start
     if (['start', 's'].includes(cmd)) {
-      Actions.start();
+      Actions.start(env1);
     }
     // Generate
     else if (['generate', 'g'].includes(cmd)) {
-      Actions.generate(env);
+      Actions.generate(env1, env2);
     }
   });
 

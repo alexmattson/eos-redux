@@ -12,7 +12,6 @@ const createDir = (dir, path) => {
 
 const createStartFile = (file, destinationPath) => {
   let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/start/${file}`;
-  // let currentPath = `templates/start/${file}`;
   command = `cp ${currentPath} ${destinationPath}`;
   Util.exec(command);
   console.log(Util.chalk.blue('created'), `${destinationPath}${file}`);
