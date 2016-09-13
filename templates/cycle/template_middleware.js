@@ -35,7 +35,7 @@ import { requestTemplates,
        createTemplate(action.template, templateSuccess, templateErrored);
        return next(action);
      case UPDATE_TEMPLATE:
-       updateTemplate(action.template, templateSuccess)
+       updateTemplate(action.template, templateSuccess);
        return next(action);
      case DESTROY_TEMPLATE:
        destroyTemplate(action.template, templateRemoved);

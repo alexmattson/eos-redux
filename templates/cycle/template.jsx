@@ -2,8 +2,8 @@ import React from 'react';
 
 // Components
 
-class TemplateList extends React.Component {
-  consturctor(props) {
+class Template extends React.Component {
+  constructor(props) {
     super(props);
   }
 
@@ -14,4 +14,4 @@ class TemplateList extends React.Component {
   }
 };
 
-export default TemplateList;
+export default Template;

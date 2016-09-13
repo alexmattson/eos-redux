@@ -50,4 +50,4 @@ export const destroyTemplate = template => ({
 export const templateError = error => ({
   type: TEMPLATE_ERROR,
   error
-})
+});

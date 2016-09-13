@@ -91,6 +91,7 @@ While this command will generate pre-filled files it will not place the generate
 
 #### Available Actions
 
+
 ##### cycle
 
 ```
@@ -125,7 +126,7 @@ components/
 ##### actions
 
 ```
-eos generate [actions] [name]
+eos generate actions [name]
 ```
 
 Generates actions file.

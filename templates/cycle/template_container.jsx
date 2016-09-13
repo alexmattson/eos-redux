@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import TemplateList from './template_list';
+import Template from './template';
 // Actions
 import { requestTemplates,
          createTemplate,
@@ -19,4 +19,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TemplateList);
+)(Template);
