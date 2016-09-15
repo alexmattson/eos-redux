@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   requestTemplates: () => dispatch(requestTemplates()),
-  createTemplate: template => dispatch(createTemplate(template))
+  createTemplate: temPlate => dispatch(createTemplate(temPlate))
 });
 
 export default connect(
