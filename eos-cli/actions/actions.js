@@ -8,10 +8,13 @@ const start = (name) => {
   name = Util.snake(name);
 
   Start.createDir(`${name}`);
+    Start.createStartFile(`index.html`, `${name}/`);
   Start.createDir(`${name}/frontend`);
   Start.createDir(`actions`, `${name}/frontend/`);
   Start.createDir(`components`, `${name}/frontend/`);
     Start.createStartFile(`root.jsx`, `${name}/frontend/components/`);
+    Start.createStartFile(`app.jsx`, `${name}/frontend/components/`);
+    Start.createStartFile(`router.jsx`, `${name}/frontend/components/`);
   Start.createDir(`middleware`, `${name}/frontend/`);
     Start.createStartFile(`master_middleware.js`, `${name}/frontend/middleware/`);
   Start.createDir(`reducers`, `${name}/frontend/`);
