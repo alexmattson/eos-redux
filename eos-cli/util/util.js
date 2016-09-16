@@ -20,7 +20,7 @@ const npmRoot = (callback) => {
   let npmRootPath = Util.exec('npm root -g');
   // Async call to create file
   npmRootPath.stdout.on('data', (data) => {
-    callback(data.trim());
+    callback(data.toString().trim());
   });
 };
 
