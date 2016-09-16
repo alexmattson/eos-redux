@@ -1,5 +1,5 @@
 const Start = require('./start.js');
-const Util = require('../util/util.js');
+const Util = require('../../util/util.js');
 
 //// Generate Helpers ////
 let command = '';

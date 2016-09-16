@@ -1,5 +1,8 @@
-const Start = require('./start.js');
-const Generate = require('./generate.js');
+// Action Helpers
+const Start = require('./action_helpers/start.js');
+const Generate = require('./action_helpers/generate.js');
+const Help = require('./action_helpers/help.js');
+// Other
 const Util = require('../util/util.js');
 
 // ACTIONS //
@@ -26,7 +29,7 @@ const start = (name) => {
   Start.createStartFile(`../webpack.config.js`, `${name}/`);
   Start.createStartFile(`../package.json`, `${name}/`);
 
-  console.log('Installing dependencies. This Could take a few minutes.');
+  console.log('Installing dependencies. This could take a few minutes...');
   Util.exec(`cd ${name} && npm install`);
 };
 
@@ -59,11 +62,16 @@ const generate = (action, name) => {
   }
 };
 
+const help = () => {
+  Help.display();
+};
+
 // Export
 
 let actions = {
   start: start,
-  generate: generate
+  generate: generate,
+  help: help
 };
 
 module.exports = actions;
