@@ -3,7 +3,7 @@ const Generate = require('./generate.js');
 const Util = require('../util/util.js');
 
 // ACTIONS //
-
+//TEST COMMENT
 const start = (name) => {
   name = Util.snake(name);
 
