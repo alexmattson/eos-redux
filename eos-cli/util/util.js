@@ -16,6 +16,14 @@ const Camelize = (str) => {
   }).replace(/\s+/g, '');
 };
 
+const npmRoot = (callback) => {
+  let npmRootPath = Util.exec('npm root -g');
+  // Async call to create file
+  npmRootPath.stdout.on('data', (data) => {
+    callback(data.trim());
+  });
+};
+
 // Export
 
 let Util = {
@@ -23,7 +31,8 @@ let Util = {
   chalk: chalk,
   snake: snake,
   kneelingCamelize: kneelingCamelize,
-  Camelize: Camelize
+  Camelize: Camelize,
+  npmRoot: npmRoot
 };
 
 module.exports = Util;

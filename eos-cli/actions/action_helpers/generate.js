@@ -5,12 +5,15 @@ const Util = require('../../util/util.js');
 let command = '';
 
 const generateFile = (name, file, type, destinationPath) => {
-  let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/cycle/template_${file}.${type}`;
   let fileName = `${Util.snake(name)}_${file}.${type}`;
-  command = `cp ${currentPath} ${destinationPath}${fileName}`;
-  Util.exec(command);
-  setName(name, file);
   console.log(Util.chalk.blue('created'), `${destinationPath}${fileName}`);
+
+  Util.npmRoot((npmRoot) => {
+    let currentPath = `${npmRoot}/eos-redux/templates/cycle/template_${file}.${type}`;
+    command = `cp ${currentPath} ${destinationPath}${fileName}`;
+    Util.exec(command);
+    setName(name, file);
+  });
 };
 
 const setName = (name, file) => {
@@ -24,23 +27,25 @@ const setName = (name, file) => {
   Util.exec(kneelingcamelize);
   let camelize = `${find_file} -exec sed -i "" 's/Template/${Util.Camelize(name)}/g' {} +`;
   Util.exec(camelize);
-}
+};
 
 const generateComponent = (name) => {
-  Start.createDir(Util.snake(name), 'frontend/components/');
 
-  let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/cycle/template.jsx`;
-  let destinationPath = `frontend/components/${Util.snake(name)}/`;
-  command = `cp ${currentPath} ${destinationPath}${Util.snake(name)}.jsx`;
-  Util.exec(command);
-  setComponentNames(name, false);
+  Util.npmRoot((npmRoot) => {
+    let currentPath = `${npmRoot}/eos-redux/templates/cycle/template.jsx`;
+    let destinationPath = `frontend/components/${Util.snake(name)}/`;
+    command = `cp ${currentPath} ${destinationPath}${Util.snake(name)}.jsx`;
+    Util.exec(command);
+    Start.createDir(Util.snake(name), 'frontend/components/');
+    setComponentNames(name, false);
 
-  generateFile(name,
-               'container',
-               'jsx',
-               `frontend/components/${Util.snake(name)}/`
-              );
-  setComponentNames(name, true);
+    generateFile(name,
+                 'container',
+                 'jsx',
+                 `frontend/components/${Util.snake(name)}/`
+                );
+    setComponentNames(name, true);
+  });
 };
 
 const setComponentNames = (name, container) => {
