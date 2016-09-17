@@ -11,10 +11,20 @@ const createDir = (dir, path) => {
 };
 
 const createStartFile = (file, destinationPath) => {
-  let currentPath = `/usr/local/lib/node_modules/eos-redux/templates/start/${file}`;
+  let currentPath = `/home/paul/.linuxbrew/lib/node_modules/eos-redux/templates/start/${file}`;
   command = `cp ${currentPath} ${destinationPath}`;
   Util.exec(command);
   console.log(Util.chalk.blue('created'), `${destinationPath}${file}`);
+};
+
+const createServer = (name) => {
+  command = `express ${name}-server`;
+  Util.exec(command);
+  console.log(Util.chalk.blue('created'), 'Express server');
+  command = `cd ${name}-server && npm install`;
+  Util.exec(command);
+  command = `mv ${name}-server ${name}/${name}-server`;
+  Util.exec(command);
 };
 
 
@@ -22,7 +32,8 @@ const createStartFile = (file, destinationPath) => {
 
 let Start = {
   createDir: createDir,
-  createStartFile: createStartFile
+  createStartFile: createStartFile,
+  createServer: createServer
 };
 
 module.exports = Start;
