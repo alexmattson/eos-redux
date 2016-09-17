@@ -31,7 +31,7 @@ const start = (name) => {
     Start.createStartFile(`../package.json`, `${name}/`);
 
   Start.installDependencies(name);
-  Start.createServer(name);
+  Start.createServer(name, Start.setUpServer);
 };
 
 const generate = (action, name) => {
@@ -63,6 +63,11 @@ const generate = (action, name) => {
   }
 };
 
+const server = () => {
+  let run = Util.exec('cd server && DEBUG=myapp:* npm start');
+  run.stdout.on('data', (data)=>console.log(data));
+};
+
 const help = () => {
   Help.display();
 };
@@ -72,6 +77,7 @@ const help = () => {
 let actions = {
   start: start,
   generate: generate,
+  server: server,
   help: help
 };
 

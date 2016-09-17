@@ -20,6 +20,10 @@ program
     else if (['generate', 'g'].includes(cmd)) {
       Actions.generate(env1, env2);
     }
+    // Server
+    else if (['server', 's'].includes(cmd)) {
+      Actions.server();
+    }
     // Help
     else {
       Actions.help();
