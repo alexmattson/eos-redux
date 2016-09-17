@@ -12,7 +12,7 @@ const start = (name) => {
 
   // Indented according to file structure
   Start.createServer(name, function(){
-    Start.createStartFile(`index.html`, `${name}/`);
+    Start.createStartFile(`index.ejs`, `${name}/views/`);
     Start.createDir(`${name}/frontend`);
     Start.createDir(`actions`, `${name}/frontend/`);
     Start.createDir(`components`, `${name}/frontend/`);
@@ -29,6 +29,7 @@ const start = (name) => {
     Start.createStartFile(`index.jsx`, `${name}/frontend/`);
     Start.createStartFile(`../webpack.config.js`, `${name}/`);
     Start.createStartFile(`../package.json`, `${name}/`);
+    Start.createStartFile(`../app.js`, `${name}/`);
     Start.installDependencies(name);
   });
 

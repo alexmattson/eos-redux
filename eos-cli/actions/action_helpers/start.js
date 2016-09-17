@@ -28,16 +28,9 @@ const installDependencies = (name) => {
 
 const createServer = (name,callback) => {
   console.log(Util.chalk.blue('creating'), 'Express server');
-  command = `express ${name}`;
+  command = `express ${name} -e`;
   Util.exec(command, (data)=>callback(name));
 };
-
-const setUpServer = (name) =>{
-  console.log('Installing server dependencies. This could take a few minutes...');
-  command = `cd ${name}/server && npm install`;
-  Util.exec(command);
-}
-
 
 // Export
 
@@ -45,8 +38,7 @@ let Start = {
   createDir: createDir,
   createStartFile: createStartFile,
   installDependencies: installDependencies,
-  createServer: createServer,
-  setUpServer: setUpServer
+  createServer: createServer
 };
 
 module.exports = Start;
