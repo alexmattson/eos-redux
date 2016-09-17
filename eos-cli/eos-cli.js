@@ -20,6 +20,10 @@ program
     else if (['generate', 'g'].includes(cmd)) {
       Actions.generate(env1, env2);
     }
+    // Help
+    else {
+      Actions.help();
+    }
   });
 
 program.parse(process.argv);

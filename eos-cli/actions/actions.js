@@ -1,5 +1,8 @@
-const Start = require('./start.js');
-const Generate = require('./generate.js');
+// Action Helpers
+const Start = require('./action_helpers/start.js');
+const Generate = require('./action_helpers/generate.js');
+const Help = require('./action_helpers/help.js');
+// Other
 const Util = require('../util/util.js');
 
 // ACTIONS //
@@ -7,25 +10,27 @@ const Util = require('../util/util.js');
 const start = (name) => {
   name = Util.snake(name);
 
+  // Indented according to file structure
   Start.createDir(`${name}`);
-  Start.createDir(`${name}/frontend`);
-  Start.createDir(`actions`, `${name}/frontend/`);
-  Start.createDir(`components`, `${name}/frontend/`);
-  Start.createStartFile(`root.jsx`, `${name}/frontend/components/`);
-  Start.createDir(`middleware`, `${name}/frontend/`);
-  Start.createStartFile(`master_middleware.js`, `${name}/frontend/middleware/`);
-  Start.createDir(`reducers`, `${name}/frontend/`);
-  Start.createStartFile(`root_reducer.js`, `${name}/frontend/reducers/`);
-  Start.createDir(`store`, `${name}/frontend/`);
-  Start.createStartFile(`store.js`, `${name}/frontend/store/`);
-  Start.createDir(`util`, `${name}/frontend/`);
-  Start.createStartFile(`index.jsx`, `${name}/frontend/`);
-  Start.createStartFile(`../webpack.config.js`, `${name}/`);
-  Start.createStartFile(`../package.json`, `${name}/`);
-  Start.createDir(`${name}/server`);
+    Start.createStartFile(`index.html`, `${name}/`);
+    Start.createDir(`${name}/frontend`);
+      Start.createDir(`actions`, `${name}/frontend/`);
+      Start.createDir(`components`, `${name}/frontend/`);
+        Start.createStartFile(`root.jsx`, `${name}/frontend/components/`);
+        Start.createStartFile(`app.jsx`, `${name}/frontend/components/`);
+        Start.createStartFile(`router.jsx`, `${name}/frontend/components/`);
+      Start.createDir(`middleware`, `${name}/frontend/`);
+        Start.createStartFile(`master_middleware.js`, `${name}/frontend/middleware/`);
+      Start.createDir(`reducers`, `${name}/frontend/`);
+        Start.createStartFile(`root_reducer.js`, `${name}/frontend/reducers/`);
+      Start.createDir(`store`, `${name}/frontend/`);
+        Start.createStartFile(`store.js`, `${name}/frontend/store/`);
+      Start.createDir(`util`, `${name}/frontend/`);
+      Start.createStartFile(`index.jsx`, `${name}/frontend/`);
+    Start.createStartFile(`../webpack.config.js`, `${name}/`);
+    Start.createStartFile(`../package.json`, `${name}/`);
 
-  console.log('Installing dependencies. This Could take a few minutes.');
-  Util.exec(`cd ${name} && npm install`);
+  Start.installDependencies(name);
   Start.createServer(name);
 };
 
@@ -58,11 +63,16 @@ const generate = (action, name) => {
   }
 };
 
+const help = () => {
+  Help.display();
+};
+
 // Export
 
 let actions = {
   start: start,
-  generate: generate
+  generate: generate,
+  help: help
 };
 
 module.exports = actions;
