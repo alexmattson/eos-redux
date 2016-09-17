@@ -28,7 +28,7 @@ const installDependencies = (name) => {
 
 const createServer = (name,callback) => {
   console.log(Util.chalk.blue('creating'), 'Express server');
-  command = `cd ${name} && express server`;
+  command = `express ${name}`;
   Util.exec(command, (data)=>callback(name));
 };
 
