@@ -27,7 +27,7 @@ const installDependencies = (name) => {
 };
 
 const createServer = (name) => {
-  command = `express ${name}-server`;
+  command = `cd ${name} && express server`;
   Util.exec(command);
   console.log(Util.chalk.blue('created'), 'Express server');
   command = `cd ${name}-server && npm install`;
