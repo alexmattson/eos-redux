@@ -39,7 +39,9 @@ The following file tree is generated:
   + frontend/
     + actions/
     + components/
+      app.jsx
       root.jsx
+      router.jsx
     + middleware/
       master_middleware.js
     + reducers/
@@ -47,8 +49,11 @@ The following file tree is generated:
     + store/
       store.js
     + util/
-    index.jsx
-  webpack.config.js
+      index.jsx
+    .gitignore
+    index.html  
+    package.json
+    webpack.config.js
 ```
 Along with the creation of the file structure comes the installation of all dependencies needed.
 
