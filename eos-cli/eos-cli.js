@@ -12,8 +12,11 @@ program
   .version('0.0.1')
   .arguments('<cmd> [env1] [env2]')
   .action(function (cmd, env1, env2) {
+    if (['start', 's'].includes(cmd) && ['backend', 'b'].includes(env2)){
+      Actions.startWServer(env1);
+    }
     // Start
-    if (['start', 's'].includes(cmd)) {
+    else if (['start', 's'].includes(cmd)) {
       Actions.start(env1);
     }
     // Generate

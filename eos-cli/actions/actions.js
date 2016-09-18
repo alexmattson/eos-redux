@@ -7,7 +7,7 @@ const Util = require('../util/util.js');
 
 // ACTIONS //
 
-const start = (name) => {
+const startWServer = (name) => {
   name = Util.snake(name);
 
   // Indented according to file structure
@@ -32,7 +32,32 @@ const start = (name) => {
     Start.createStartFile(`../app.js`, `${name}/`);
     Start.installDependencies(name);
   });
+};
 
+const start = (name) => {
+  name = Util.snake(name);
+
+  // Indented according to file structure
+  Start.createDir(`${name}`);
+    Start.createStartFile(`index.html`, `${name}/`);
+    Start.createDir(`${name}/frontend`);
+      Start.createDir(`actions`, `${name}/frontend/`);
+      Start.createDir(`components`, `${name}/frontend/`);
+        Start.createStartFile(`root.jsx`, `${name}/frontend/components/`);
+        Start.createStartFile(`app.jsx`, `${name}/frontend/components/`);
+        Start.createStartFile(`router.jsx`, `${name}/frontend/components/`);
+      Start.createDir(`middleware`, `${name}/frontend/`);
+        Start.createStartFile(`master_middleware.js`, `${name}/frontend/middleware/`);
+      Start.createDir(`reducers`, `${name}/frontend/`);
+        Start.createStartFile(`root_reducer.js`, `${name}/frontend/reducers/`);
+      Start.createDir(`store`, `${name}/frontend/`);
+        Start.createStartFile(`store.js`, `${name}/frontend/store/`);
+      Start.createDir(`util`, `${name}/frontend/`);
+      Start.createStartFile(`index.jsx`, `${name}/frontend/`);
+    Start.createStartFile(`../webpack.config.js`, `${name}/`);
+    Start.createStartFile(`../package.json`, `${name}/`);
+
+  Start.installDependencies(name);
 };
 
 const generate = (action, name) => {
@@ -77,6 +102,7 @@ const help = () => {
 
 let actions = {
   start: start,
+  startWServer: startWServer,
   generate: generate,
   server: server,
   help: help
