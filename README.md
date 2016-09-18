@@ -3,7 +3,13 @@
 ![eos.png](https://s10.postimg.org/7hfcpvwpl/eos.png)
 
 
-## How to install:
+## Table of contents
+
+* [How to install](#how-to-install)
+* [How to use](#how-to-use)
+* [Development](#development)
+
+## <a id="how-to-install"></a> How to install
 
 Install EOS as a global npm package
 
@@ -13,7 +19,7 @@ npm install -g eos-redux
 
 You're all set!
 
-## How to use:
+## <a id="how-to-use"></a> How to use
 
 All commands are run through the following syntax:
 ```
@@ -180,7 +186,8 @@ util/
   [name]_api_util.js
 ```
 
-## Development
+
+## <a id="development"></a> Development
 
 ### How to Set Up Development Environment
 
@@ -202,4 +209,4 @@ $ [path to local copy]/eos-redux/eos-cli/eos-cli.js <command> [args]
 
 
 ---
-Developed by [Alex Mattson](http://www.alexmattson.com)
+Developed by [Alex Mattson](http://www.alexmattson.com) with the help of many great [contributors](https://github.com/amattson21/eos-redux/graphs/contributors)  
