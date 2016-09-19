@@ -30,7 +30,12 @@ Alternate syntax:
 eos s [name]
 ```
 
-Creates a Redux app with the name specified.
+Creates a Redux app with the name specified and a Node.js Express server.
+
+To skip backend generation, use:
+```
+eos start [name] --backend none
+```
 
 The following file tree is generated:
 
@@ -66,6 +71,17 @@ All the first level dependencies included are:
 * redux
 * webpack
 
+If a backend was generated on start, the following additional dependencies are included:
+
+* body-parser
+* cookie-parser
+* debug
+* express
+* jade
+* morgan
+* serve-favicon
+* ejs
+
 For ease of use we have also included a default webpack.config.js file that is structured correctly for this framework.  
 
 ### Generate
@@ -88,6 +104,14 @@ SampleName
 ```
 
 While this command will generate pre-filled files it will not place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively. This must be done manually.
+
+### Server
+
+```
+eos server
+```
+
+If a backend was generated on start, this command starts an Express server listening on port 3000.
 
 #### Available Actions
 
