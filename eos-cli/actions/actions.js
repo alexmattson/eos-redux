@@ -4,42 +4,36 @@ const Generate = require('./action_helpers/generate.js');
 const Help = require('./action_helpers/help.js');
 // Other
 const Util = require('../util/util.js');
-
 // ACTIONS //
 
-const startWServer = (name) => {
+const backend = (name, type) => {
   name = Util.snake(name);
 
   // Indented according to file structure
   Start.createServer(name, function(){
-    Start.createStartFile(`index.ejs`, `${name}/views/`);
-    Start.createDir(`${name}/frontend`);
-      Start.createDir(`actions`, `${name}/frontend/`);
-      Start.createDir(`components`, `${name}/frontend/`);
-        Start.createStartFile(`root.jsx`, `${name}/frontend/components/`);
-        Start.createStartFile(`app.jsx`, `${name}/frontend/components/`);
-        Start.createStartFile(`router.jsx`, `${name}/frontend/components/`);
-      Start.createDir(`middleware`, `${name}/frontend/`);
-        Start.createStartFile(`master_middleware.js`, `${name}/frontend/middleware/`);
-      Start.createDir(`reducers`, `${name}/frontend/`);
-        Start.createStartFile(`root_reducer.js`, `${name}/frontend/reducers/`);
-      Start.createDir(`store`, `${name}/frontend/`);
-        Start.createStartFile(`store.js`, `${name}/frontend/store/`);
-      Start.createDir(`util`, `${name}/frontend/`);
-      Start.createStartFile(`index.jsx`, `${name}/frontend/`);
-    Start.createStartFile(`../webpack.config.js`, `${name}/`);
-    Start.createStartFile(`../package.json`, `${name}/`);
-    Start.createStartFile(`../app.js`, `${name}/`);
-    Start.installDependencies(name);
+    let path = '';
+    if (type === 'none') {
+      Start.createStartFile(`index/index.html`, `${name}/`);
+    }
+    else {
+      Start.createStartFile(`index/index.ejs`, `${name}/views/`);
+      path = 'backend/';
+      Start.createStartFile(`../${path}app.js`, `${name}/`);
+    }
+    Start.createStartFile(`../${path}webpack.config.js`, `${name}/`);
+    Start.createStartFile(`../${path}package.json`, `${name}/`);
   });
 };
 
 const start = (name) => {
   name = Util.snake(name);
-
+  let exists;
+  Util.exec('[ -d ¨a¨ ]&&echo ¨exists¨||echo ¨not exists¨', function(data) {
+    exists = data;
+  });
+  const dirExists = exists === 'exists' ? true : false;
   // Indented according to file structure
-  Start.createDir(`${name}`);
-    Start.createStartFile(`index.html`, `${name}/`);
+  if (dirExists) Start.createDir(`${name}`);
     Start.createDir(`${name}/frontend`);
       Start.createDir(`actions`, `${name}/frontend/`);
       Start.createDir(`components`, `${name}/frontend/`);
@@ -54,8 +48,6 @@ const start = (name) => {
         Start.createStartFile(`store.js`, `${name}/frontend/store/`);
       Start.createDir(`util`, `${name}/frontend/`);
       Start.createStartFile(`index.jsx`, `${name}/frontend/`);
-    Start.createStartFile(`../webpack.config.js`, `${name}/`);
-    Start.createStartFile(`../package.json`, `${name}/`);
 
   Start.installDependencies(name);
 };
@@ -102,7 +94,7 @@ const help = () => {
 
 let actions = {
   start: start,
-  startWServer: startWServer,
+  backend: backend,
   generate: generate,
   server: server,
   help: help

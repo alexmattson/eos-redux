@@ -12,12 +12,10 @@ program
   .version('0.0.1')
   .arguments('<cmd> [env1] [env2]')
   .action(function (cmd, env1, env2) {
-    if (['start', 's'].includes(cmd) && ['backend', 'b'].includes(env2)){
-      Actions.startWServer(env1);
-    }
     // Start
-    else if (['start', 's'].includes(cmd)) {
-      Actions.start(env1);
+    if (['start', 's'].includes(cmd)) {
+      Actions.backend(env1, program.backend);
+      setTimeout( ()=> Actions.start(env1), 1000 );
     }
     // Generate
     else if (['generate', 'g'].includes(cmd)) {
@@ -31,6 +29,8 @@ program
     else {
       Actions.help();
     }
-  });
+  })
+  .option('-b, --backend [type]');
+
 
 program.parse(process.argv);
