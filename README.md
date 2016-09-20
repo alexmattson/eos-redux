@@ -98,7 +98,7 @@ sampleName
 SampleName
 ```
 
-While this command will generate pre-filled files it will not place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively. This must be done manually.
+This command will both generate pre-filled files and place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively.
 
 #### Available Actions
 

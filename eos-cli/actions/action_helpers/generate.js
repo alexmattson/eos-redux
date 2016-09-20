@@ -66,6 +66,27 @@ const setComponentNames = (name, container) => {
   Util.exec(camelize);
 };
 
+const append = (name, type) => {
+  const masterFile = type === "middleware" ? "master_middleware" : "root_reducer";
+  const appliedFile = () => {
+    if (type === "middleware") {
+      return `${Util.Camelize(name)}Middleware`;
+    } else {
+      return `${Util.snake(name)}: ${Util.Camelize(name)}Reducer`;
+    }
+  };
+
+  const file = `find . -type f -name "*${masterFile}*"`;
+  command = `${file} -exec sed -i "" -e "/import.*'redux';/a \\\\
+  import ${Util.Camelize(name)}${Util.Camelize(type)} from './${Util.snake(name)}_${type}';" -e '/);/ i \\
+  ${appliedFile()}' -e '/${Util.Camelize(type)}$/ s/$/,/' {} +`;
+  let tabFixCommand = `${file} -exec sed -i "" -e '/${Util.Camelize(type)}$/ s/^/\\'$'\\t''/' {} +`;
+  Util.exec(command, () => {
+    Util.exec(tabFixCommand);
+  });
+  console.log(Util.chalk.blue('appended'),
+    `${Util.Camelize(name)}${Util.Camelize(type)} to ${Util.Camelize(masterFile)}`);
+};
 
 // Export
 
@@ -73,7 +94,8 @@ let Generate = {
   generateFile: generateFile,
   setName: setName,
   generateComponent: generateComponent,
-  setComponentNames: setComponentNames
+  setComponentNames: setComponentNames,
+  append: append
 };
 
 module.exports = Generate;
