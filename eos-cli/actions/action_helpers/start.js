@@ -7,11 +7,11 @@ const createDir = (dir, path) => {
   path = path ? path : '';
   command = `mkdir ${path}${dir}`;
   Util.exec(command);
-  console.log(Util.chalk.green('creating'), `${path}${dir}/`);
+  console.log(Util.chalk.green('created'), `${path}${dir}/`);
 };
 
 const createStartFile = (file, destinationPath) => {
-  console.log(Util.chalk.blue('creating'), `${destinationPath}${file}`);
+  console.log(Util.chalk.blue('created'), `${destinationPath}${file}`);
 
   Util.npmRoot((npmRoot) => {
     let currentPath =  `${npmRoot}/eos-redux/templates/start/${file}`;

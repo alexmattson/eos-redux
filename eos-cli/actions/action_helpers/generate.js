@@ -84,7 +84,7 @@ const append = (name, type) => {
   Util.exec(command, () => {
     Util.exec(tabFixCommand);
   });
-  console.log(Util.chalk.blue('appended'),
+  console.log(Util.chalk.magenta('appended'),
     `${Util.Camelize(name)}${Util.Camelize(type)} to ${Util.Camelize(masterFile)}`);
 };
 

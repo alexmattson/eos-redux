@@ -24,9 +24,6 @@ program
     else {
       Actions.help();
     }
-  })
-  .option('-b, --backend [type]');
-
+  });
+  
 program.parse(process.argv);
-
-console.log(' backend: %j', program.backend);
