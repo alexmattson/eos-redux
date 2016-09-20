@@ -1,9 +1,8 @@
 import { applyMiddleware } from 'redux';
-
-//Import middleware
+import CarsMiddleware from './cars_middleware';
 
 const masterMiddleware = applyMiddleware(
-  // your middleware here
+	CarsMiddleware
 );
 
 export default masterMiddleware;

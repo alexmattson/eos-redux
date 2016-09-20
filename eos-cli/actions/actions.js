@@ -30,6 +30,10 @@ const start = (name) => {
         Start.createStartFile(`store.js`, `${name}/frontend/store/`);
       Start.createDir(`util`, `${name}/frontend/`);
       Start.createStartFile(`index.jsx`, `${name}/frontend/`);
+    Start.createStartFile(`../webpack.config.js`, `${name}/`);
+    Start.createStartFile(`../package.json`, `${name}/`);
+    Start.createStartFile(`../.gitignore`, `${name}/`);
+  Start.installDependencies(name);
 };
 
 const generate = (action, name) => {
@@ -48,11 +52,13 @@ const generate = (action, name) => {
     // Middleware
     Generate.generateFile(name, 'middleware', 'js', './frontend/middleware/');
     Generate.setName(name, 'middleware');
+    Generate.append(name, 'middleware');
   }
   if (action === 'reducer' || cycle) {
     // Reducer
     Generate.generateFile(name, 'reducer', 'js', './frontend/reducers/');
     Generate.setName(name, 'reducer');
+    Generate.append(name, 'reducer');
   }
   if (action === 'api_util' || cycle) {
     // Util

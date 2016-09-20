@@ -3,7 +3,13 @@
 ![eos.png](https://s10.postimg.org/7hfcpvwpl/eos.png)
 
 
-## How to install:
+## Table of contents
+
+* [How to install](#how-to-install)
+* [How to use](#how-to-use)
+* [Development](#development)
+
+## <a id="how-to-install"></a> How to install
 
 Install EOS as a global npm package
 
@@ -13,7 +19,7 @@ npm install -g eos-redux
 
 You're all set!
 
-## How to use:
+## <a id="how-to-use"></a> How to use
 
 All commands are run through the following syntax:
 ```
@@ -44,7 +50,9 @@ The following file tree is generated:
   + frontend/
     + actions/
     + components/
+      app.jsx
       root.jsx
+      router.jsx
     + middleware/
       master_middleware.js
     + reducers/
@@ -52,10 +60,18 @@ The following file tree is generated:
     + store/
       store.js
     + util/
-    index.jsx
-  webpack.config.js
+      index.jsx
+    .gitignore
+    index.html  
+    package.json
+    webpack.config.js
 ```
 Along with the creation of the file structure comes the installation of all dependencies needed.
+WARNING:  NVM users will need to run the following commands to install dependencies:
+```Bash
+cd [name]
+npm install
+```
 
 All the first level dependencies included are:
 
@@ -103,7 +119,7 @@ sampleName
 SampleName
 ```
 
-While this command will generate pre-filled files it will not place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively. This must be done manually.
+This command will both generate pre-filled files and place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively.
 
 ### Server
 
@@ -200,6 +216,26 @@ util/
 ```
 
 
+## <a id="development"></a> Development
+
+### How to Set Up Development Environment
+
+To use a local copy of EOS Redux clone down the repo:
+```Bash
+git clone https://github.com/amattson21/eos-redux.git
+```
+
+Setup the local environment:
+```Bash
+cd eos-redux
+npm install
+```
+
+To run commands with the local copy instead of `$ eos <command> [args]` use:
+```Bash
+[path to local copy]/eos-redux/eos-cli/eos-cli.js <command> [args]
+```
+
 
 ---
-Developed by [Alex Mattson](http://www.alexmattson.com)
+Developed by [Alex Mattson](http://www.alexmattson.com) with the help of many great [contributors](https://github.com/amattson21/eos-redux/graphs/contributors)  
