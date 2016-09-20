@@ -49,11 +49,13 @@ const generate = (action, name) => {
     // Middleware
     Generate.generateFile(name, 'middleware', 'js', './frontend/middleware/');
     Generate.setName(name, 'middleware');
+    Generate.append(name, 'middleware');
   }
   if (action === 'reducer' || cycle) {
     // Reducer
     Generate.generateFile(name, 'reducer', 'js', './frontend/reducers/');
     Generate.setName(name, 'reducer');
+    Generate.append(name, 'reducer');
   }
   if (action === 'api_util' || cycle) {
     // Util
