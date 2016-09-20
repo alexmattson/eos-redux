@@ -26,6 +26,9 @@ const installDependencies = (name) => {
   let install = Util.exec(`cd ${name} && npm install`);
   install.on('close', (code) => {
     console.log(`Done`);
+    console log(`IF YOU USE NVM RUN THE FOLLOWING COMMANDS:`);
+    console log(`cd ${name}`);
+    console log(`npm install`);
   });
 };
 

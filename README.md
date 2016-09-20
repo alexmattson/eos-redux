@@ -62,6 +62,11 @@ The following file tree is generated:
     webpack.config.js
 ```
 Along with the creation of the file structure comes the installation of all dependencies needed.
+WARNING:  NVM users will need to run the following commands to install dependencies:
+```Bash
+cd [name]
+npm install
+```
 
 All the first level dependencies included are:
 
