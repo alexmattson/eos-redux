@@ -33,7 +33,6 @@ const start = (name) => {
     Start.createStartFile(`../webpack.config.js`, `${name}/`);
     Start.createStartFile(`../package.json`, `${name}/`);
     Start.createStartFile(`../.gitignore`, `${name}/`);
-  Start.installDependencies(name);
 };
 
 const generate = (action, name) => {
