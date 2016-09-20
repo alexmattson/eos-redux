@@ -66,6 +66,25 @@ const setComponentNames = (name, container) => {
   Util.exec(camelize);
 };
 
+//Server
+const server = (name, type) => {
+
+  let path = '';
+
+  switch (type) {
+    case 'none':
+      Start.createStartFile(`index/index.html`, `${name}/`);
+      break;
+    default:
+      Start.createDir(`server`, `${name}/`);
+      Start.createStartFile(`index/index.ejs`, `${name}/server/`);
+      path = 'backend/';
+      Start.createStartFile(`../${path}app.js`, `${name}/server/`);
+  }
+  Start.createStartFile(`../${path}webpack.config.js`, `${name}/`);
+  Start.createStartFile(`../${path}package.json`, `${name}/`,
+    Start.installDependencies);
+};
 
 // Export
 
@@ -73,7 +92,8 @@ let Generate = {
   generateFile: generateFile,
   setName: setName,
   generateComponent: generateComponent,
-  setComponentNames: setComponentNames
+  setComponentNames: setComponentNames,
+  server: server
 };
 
 module.exports = Generate;

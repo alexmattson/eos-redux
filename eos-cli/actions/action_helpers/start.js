@@ -10,13 +10,15 @@ const createDir = (dir, path) => {
   console.log(Util.chalk.green('creating'), `${path}${dir}/`);
 };
 
-const createStartFile = (file, destinationPath) => {
+const createStartFile = (file, destinationPath, callback) => {
   console.log(Util.chalk.blue('creating'), `${destinationPath}${file}`);
 
   Util.npmRoot((npmRoot) => {
     let currentPath =  `${npmRoot}/eos-redux/templates/start/${file}`;
     command = `cp ${currentPath} ${destinationPath}`;
-    Util.exec(command);
+    let name = destinationPath.split('/')[0];
+    if (callback) Util.exec(command, callback(name));
+    else Util.exec(command);
   });
 
 };
@@ -26,19 +28,14 @@ const installDependencies = (name) => {
   Util.exec(`cd ${name} && npm install`);
 };
 
-const createServer = (name,callback) => {
-  console.log(Util.chalk.blue('creating'), 'Express server');
-  command = `express ${name} -e`;
-  Util.exec(command, (data)=>callback(name));
-};
+
 
 // Export
 
 let Start = {
   createDir: createDir,
   createStartFile: createStartFile,
-  installDependencies: installDependencies,
-  createServer: createServer
+  installDependencies: installDependencies
 };
 
 module.exports = Start;
