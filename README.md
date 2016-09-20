@@ -193,18 +193,18 @@ util/
 
 To use a local copy of EOS Redux clone down the repo:
 ```Bash
-$ git clone https://github.com/amattson21/eos-redux.git
+git clone https://github.com/amattson21/eos-redux.git
 ```
 
 Setup the local environment:
 ```Bash
-$ cd eos-redux
-$ npm install
+cd eos-redux
+npm install
 ```
 
 To run commands with the local copy instead of `$ eos <command> [args]` use:
 ```Bash
-$ [path to local copy]/eos-redux/eos-cli/eos-cli.js <command> [args]
+[path to local copy]/eos-redux/eos-cli/eos-cli.js <command> [args]
 ```
 
 

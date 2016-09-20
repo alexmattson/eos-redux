@@ -23,7 +23,10 @@ const createStartFile = (file, destinationPath) => {
 
 const installDependencies = (name) => {
   console.log('Installing dependencies. This could take a few minutes...');
-  Util.exec(`cd ${name} && npm install`);
+  let install = Util.exec(`cd ${name} && npm install`);
+  install.on('close', (code) => {
+    console.log(`Done`);
+  });
 };
 
 
