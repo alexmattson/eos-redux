@@ -13,6 +13,7 @@
     * [middleware](#generate-middleware)
     * [reducer](#generate-reducer)
     * [api_util](#generate-api_util)
+  - [Remove](#action-remove)
   - [Server](#action-server)
 * [Development](#development)
 
@@ -213,6 +214,19 @@ Generates api_util file.
 util/
   [name]_api_util.js
 ```
+### <a id="action-remove"></a> Remove
+
+Remove follows the same syntax as generate and directly reverses any action that generate makes. It can be used on the full redux cycle or on any individual portion.
+
+```
+eos remove [type] [name]
+```
+Alternate syntax:
+```
+eos rm [type] [name]
+```
+
+
 ### <a id="action-server"></a> Server
 
 ```

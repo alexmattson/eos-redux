@@ -22,6 +22,10 @@ program
     else if (['generate', 'g'].includes(cmd)) {
       Actions.generate(env1, env2);
     }
+    // Remove
+    else if (['remove', 'rm'].includes(cmd)) {
+      Actions.remove(env1, env2);
+    }
     // Server
     else if (['server'].includes(cmd)) {
       Actions.server();

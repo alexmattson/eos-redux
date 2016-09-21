@@ -1,15 +1,13 @@
 // Action Helpers
 const Start = require('./action_helpers/start.js');
 const Generate = require('./action_helpers/generate.js');
+const Remove = require('./action_helpers/remove.js');
 const Help = require('./action_helpers/help.js');
 // Other
 const Util = require('../util/util.js');
-// ACTIONS //
 
-const backend = (name, type) => {
-  name = Util.snake(name);
-  Generate.server(name, type);
-};
+
+// ACTIONS //
 
 const start = (name) => {
   name = Util.snake(name);
@@ -30,8 +28,6 @@ const start = (name) => {
         Start.createStartFile(`store.js`, `${name}/frontend/store/`);
       Start.createDir(`util`, `${name}/frontend/`);
       Start.createStartFile(`index.jsx`, `${name}/frontend/`);
-    Start.createStartFile(`../webpack.config.js`, `${name}/`);
-    Start.createStartFile(`../package.json`, `${name}/`);
     Start.createStartFile(`../.gitignore`, `${name}/`);
 };
 
@@ -66,6 +62,32 @@ const generate = (action, name) => {
   }
 };
 
+const remove = (action, name) => {
+  let cycle = (action === 'cycle');
+  if (action === 'component' || cycle) {
+    // Component
+    Remove.folder(`frontend/components/${Util.snake(name)}`);
+  }
+  if (action === 'actions' || cycle) {
+    // Actions
+    Remove.file(`./frontend/actions/${Util.snake(name)}_actions.js`);
+  }
+  if (action === 'middleware' || cycle) {
+    // Middleware
+    Remove.file(`./frontend/middleware/${Util.snake(name)}_middleware.js`);
+    Remove.append(name, 'middleware', `frontend/middleware/master_middleware.js`);
+  }
+  if (action === 'reducer' || cycle) {
+    // Reducer
+    Remove.file(`./frontend/reducers/${Util.snake(name)}_reducer.js`);
+    Remove.append(name, 'reducer', `frontend/reducers/root_reducer.js`);
+  }
+  if (action === 'api_util' || cycle) {
+    // Util
+    Remove.file(`./frontend/util/${Util.snake(name)}_api_util.js`);
+  }
+};
+
 const server = () => {
   let run = Util.exec('node server/app.js');
   run.stdout.on('data', (data)=>console.log(data));
@@ -75,12 +97,21 @@ const help = () => {
   Help.display();
 };
 
+// OPTION ACTIONS //
+
+const backend = (name, type) => {
+  name = Util.snake(name);
+  Generate.server(name, type);
+};
+
+
 // Export
 
 let actions = {
   start: start,
   backend: backend,
   generate: generate,
+  remove: remove,
   server: server,
   help: help
 };
