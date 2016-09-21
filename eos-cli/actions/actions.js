@@ -28,7 +28,8 @@ const start = (name) => {
         Start.createStartFile(`store.js`, `${name}/frontend/store/`);
       Start.createDir(`util`, `${name}/frontend/`);
       Start.createStartFile(`index.jsx`, `${name}/frontend/`);
-    Start.createStartFile(`../.gitignore`, `${name}/`);
+    //creates .gitignore from command line to solve nvm issue
+    Util.exec(`cd ${name} && echo 'node_modules/\nbundle.js\nbundle.js.map' >> .gitignore`);
 };
 
 const generate = (action, name) => {
