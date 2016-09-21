@@ -2,11 +2,18 @@
 
 ![eos.png](https://s10.postimg.org/7hfcpvwpl/eos.png)
 
-
 ## Table of contents
-
 * [How to install](#how-to-install)
 * [How to use](#how-to-use)
+  - [Start](#action-start)
+  - [Generate](#action-generate)
+    * [cycle](#generate-cycle)
+    * [component](#generate-component)
+    * [action](#generate-action)
+    * [middleware](#generate-middleware)
+    * [reducer](#generate-reducer)
+    * [api_util](#generate-api_util)
+  - [Server](#action-server)
 * [Development](#development)
 
 ## <a id="how-to-install"></a> How to install
@@ -26,7 +33,7 @@ All commands are run through the following syntax:
 eos <command> [args]
 ```
 
-### Start
+### <a id="action-start"></a> Start
 
 ```
 eos start [name]
@@ -43,7 +50,7 @@ To skip backend generation, use:
 eos start [name] --backend none
 ```
 
-The following file tree is generated:
+The following file tree is generated for the frontend:
 
 ```
 [name]/
@@ -100,7 +107,7 @@ If a backend was generated on start, the following additional dependencies are i
 
 For ease of use we have also included a default webpack.config.js file that is structured correctly for this framework.  
 
-### Generate
+### <a id="action-generate"></a> Generate
 
 ```
 eos generate [action] [name]
@@ -121,18 +128,10 @@ SampleName
 
 This command will both generate pre-filled files and place the generated middleware or reducer into the master_middleware.js or root_reducer.js respectively.
 
-### Server
-
-```
-eos server
-```
-
-If a backend was generated on start, this command starts an Express server listening on port 3000.
-
 #### Available Actions
 
 
-##### cycle
+##### <a id="generate-cycle"></a> cycle
 
 ```
 eos generate cycle [name]
@@ -148,7 +147,7 @@ Generates a full redux cycle for a given name. The files that will be generated 
 - frontend/reducer/[name]\_reducer.js
 - frontend/util/[name]\_api_util.js
 
-##### component
+##### <a id="generate-component"></a> component
 
 ```
 eos generate component [name]
@@ -163,7 +162,7 @@ components/
     [name].jsx
 ```
 
-##### actions
+##### <a id="generate-action"></a> actions
 
 ```
 eos generate actions [name]
@@ -176,7 +175,7 @@ actions/
   [name]_actions.js
 ```
 
-##### middleware
+##### <a id="generate-middleware"></a> middleware
 
 ```
 eos generate middleware [name]
@@ -189,7 +188,7 @@ middleware/
   [name]_middleware.js
 ```
 
-##### reducer
+##### <a id="generate-reducer"></a> reducer
 
 ```
 eos generate reducer [name]
@@ -202,7 +201,7 @@ reducer/
   [name]_reducer.js
 ```
 
-##### api_util
+##### <a id="generate-api_util"></a> api_util
 
 ```
 eos generate api_util [name]
@@ -214,7 +213,13 @@ Generates api_util file.
 util/
   [name]_api_util.js
 ```
+### <a id="action-server"></a> Server
 
+```
+eos server
+```
+
+If a backend was generated on start, this command starts an Express server listening on port 8000.
 
 ## <a id="development"></a> Development
 
