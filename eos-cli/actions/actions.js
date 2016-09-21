@@ -4,15 +4,18 @@ const Generate = require('./action_helpers/generate.js');
 const Help = require('./action_helpers/help.js');
 // Other
 const Util = require('../util/util.js');
-
 // ACTIONS //
+
+const backend = (name, type) => {
+  name = Util.snake(name);
+  Generate.server(name, type);
+};
 
 const start = (name) => {
   name = Util.snake(name);
 
   // Indented according to file structure
   Start.createDir(`${name}`);
-    Start.createStartFile(`index.html`, `${name}/`);
     Start.createDir(`${name}/frontend`);
       Start.createDir(`actions`, `${name}/frontend/`);
       Start.createDir(`components`, `${name}/frontend/`);
@@ -30,7 +33,6 @@ const start = (name) => {
     Start.createStartFile(`../webpack.config.js`, `${name}/`);
     Start.createStartFile(`../package.json`, `${name}/`);
     Start.createStartFile(`../.gitignore`, `${name}/`);
-  Start.installDependencies(name);
 };
 
 const generate = (action, name) => {
@@ -64,6 +66,11 @@ const generate = (action, name) => {
   }
 };
 
+const server = () => {
+  let run = Util.exec('node server/app.js');
+  run.stdout.on('data', (data)=>console.log(data));
+};
+
 const help = () => {
   Help.display();
 };
@@ -72,7 +79,9 @@ const help = () => {
 
 let actions = {
   start: start,
+  backend: backend,
   generate: generate,
+  server: server,
   help: help
 };
 

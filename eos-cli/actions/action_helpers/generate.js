@@ -66,6 +66,27 @@ const setComponentNames = (name, container) => {
   Util.exec(camelize);
 };
 
+//Server
+const server = (name, type) => {
+
+  let path = '';
+
+  switch (type) {
+    case 'none':
+      Start.createStartFile(`index/index.html`, `${name}/`);
+      break;
+    default:
+      Start.createDir(`server`, `${name}/`);
+      Start.createStartFile(`index/index.ejs`, `${name}/server/`);
+      path = 'backend/';
+      Start.createStartFile(`../${path}app.js`, `${name}/server/`);
+  }
+  Start.createStartFile(`../${path}webpack.config.js`, `${name}/`);
+  Start.createStartFile(`../${path}package.json`, `${name}/`,
+    Start.installDependencies);
+};
+
+//APPEND
 const append = (name, type) => {
   const masterFile = type === "middleware" ? "master_middleware" : "root_reducer";
   const appliedFile = () => {
@@ -95,6 +116,7 @@ let Generate = {
   setName: setName,
   generateComponent: generateComponent,
   setComponentNames: setComponentNames,
+  server: server,
   append: append
 };
 
