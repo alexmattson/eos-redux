@@ -16,19 +16,6 @@ const generateFile = (name, file, type, destinationPath) => {
   });
 };
 
-const setName = (name, file) => {
-  let find_file = `find . -type f -name "*${Util.snake(name)}_${file}*"`;
-
-  let uppercase = `${find_file} -exec sed -i "" 's/TEMPLATE/${Util.snake(name).toUpperCase()}/g' {} +`;
-  Util.exec(uppercase);
-  let lowercase = `${find_file} -exec sed -i "" 's/template/${Util.snake(name).toLowerCase()}/g' {} +`;
-  Util.exec(lowercase);
-  let kneelingcamelize = `${find_file} -exec sed -i "" 's/temPlate/${Util.kneelingCamelize(name)}/g' {} +`;
-  Util.exec(kneelingcamelize);
-  let camelize = `${find_file} -exec sed -i "" 's/Template/${Util.Camelize(name)}/g' {} +`;
-  Util.exec(camelize);
-};
-
 const generateComponent = (name) => {
 
   Util.npmRoot((npmRoot) => {
@@ -48,6 +35,25 @@ const generateComponent = (name) => {
   });
 };
 
+let pluralCommand = (file, name) => {
+  return (
+    `${find_file} -exec sed -i "" -e 's/TEMPLATES/${Util.snake(Util.pluralize(name)).toUpperCase()}/g' -e 's/templates/${Util.snake(Util.pluralize(name)).toLowerCase()}/g' -e 's/temPlates/${Util.kneelingCamelize(Util.pluralize(name))}/g' -e 's/Templates/${Util.Camelize(Util.pluralize(name))}/g' {} +`
+  )
+};
+
+let singularCommand = (file, name) => {
+  return (
+    `${find_file} -exec sed -i "" -e 's/TEMPLATE/${Util.snake(name).toUpperCase()}/g' -e 's/template/${Util.snake(name).toLowerCase()}/g' -e 's/temPlate/${Util.kneelingCamelize(name)}/g' -e 's/Template/${Util.Camelize(name)}/g' {} +`
+  )
+};
+
+const setName = (name, file) => {
+  find_file = `find . -type f -name "*${Util.snake(name)}_${file}*"`;
+  Util.exec(pluralCommand(file, name), () => {
+    Util.exec(singularCommand(file, name));
+  });
+};
+
 const setComponentNames = (name, container) => {
   let find_file;
   if (container) {
@@ -56,14 +62,9 @@ const setComponentNames = (name, container) => {
     find_file = `find . -type f -name "*${Util.snake(name)}.jsx*"`;
   }
 
-  let uppercase = `${find_file} -exec sed -i "" 's/TEMPLATE/${Util.snake(name).toUpperCase()}/g' {} +`
-  Util.exec(uppercase);
-  let lowercase = `${find_file} -exec sed -i "" 's/template/${Util.snake(name).toLowerCase()}/g' {} +`
-  Util.exec(lowercase);
-  let kneelingcamelize = `${find_file} -exec sed -i "" 's/temPlate/${Util.kneelingCamelize(name)}/g' {} +`
-  Util.exec(kneelingcamelize);
-  let camelize = `${find_file} -exec sed -i "" 's/Template/${Util.Camelize(name)}/g' {} +`
-  Util.exec(camelize);
+  Util.exec(pluralCommand(file, name), () => {
+    Util.exec(singularCommand(file, name));
+  });
 };
 
 const append = (name, type) => {

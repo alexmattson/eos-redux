@@ -20,10 +20,10 @@ import { requestTemplates,
        } from '../actions/template_actions';
 
  export default ({getState, dispatch}) => next => action => {
-   const templatesSuccess = data => dispatch(receiveTemplates(data));
-   const templateSuccess = data => dispatch(receiveTemplate(data));
-   const templateRemoved = data => dispatch(removeTemplate(data));
-   const templateErrored = data => dispatch(templateError(data.responseJSON));
+   const temPlatesSuccess = data => dispatch(receiveTemplates(data));
+   const temPlateSuccess = data => dispatch(receiveTemplate(data));
+   const temPlateRemoved = data => dispatch(removeTemplate(data));
+   const temPlateErrored = data => dispatch(templateError(data.responseJSON));
    switch(action.type){
      case REQUEST_TEMPLATES:
        fetchTemplates(templatesSuccess);

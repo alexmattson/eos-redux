@@ -3,6 +3,7 @@
 const exec = require('child_process').exec;
 const chalk = require('chalk');
 const snake = require('to-snake-case');
+const pluralize = require('pluralize');
 
 const kneelingCamelize = (str) => {
   return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
@@ -32,7 +33,8 @@ let Util = {
   snake: snake,
   kneelingCamelize: kneelingCamelize,
   Camelize: Camelize,
-  npmRoot: npmRoot
+  npmRoot: npmRoot,
+  pluralize: pluralize
 };
 
 module.exports = Util;
