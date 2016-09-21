@@ -10,8 +10,8 @@ const program = require('commander');
 let name, start;
 program
   .version('0.0.1')
-  .arguments('<cmd> [env1] [env2]')
-  .action(function (cmd, env1, env2) {
+  .arguments('<cmd> [env1] [env2] [env3]')
+  .action(function (cmd, env1, env2, env3) {
     // Start
     if (['start', 's'].includes(cmd)) {
       start = true;
@@ -20,7 +20,7 @@ program
     }
     // Generate
     else if (['generate', 'g'].includes(cmd)) {
-      Actions.generate(env1, env2);
+      Actions.generate(env1, env2, env3);
     }
     // Remove
     else if (['remove', 'rm'].includes(cmd)) {

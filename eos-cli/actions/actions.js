@@ -31,7 +31,7 @@ const start = (name) => {
     Start.createStartFile(`../.gitignore`, `${name}/`);
 };
 
-const generate = (action, name) => {
+const generate = (action, name, ...args) => {
   let cycle = (action === 'cycle');
   if (action === 'component' || cycle) {
     // Component
@@ -59,6 +59,11 @@ const generate = (action, name) => {
     // Util
     Generate.generateFile(name, 'api_util', 'js', './frontend/util/');
     Generate.setName(name, 'api_util');
+  }
+  if (action === 'service' || cycle) {
+    // Util
+    Generate.generateService(name, args[0]);
+    // Generate.setName(name, 'api_util');
   }
 };
 
@@ -90,8 +95,9 @@ const remove = (action, name) => {
 
 const server = () => {
   let run = Util.exec('node server/app.js');
-  run.stdout.on('data', (data)=>console.log(data));
+  run.stdout.on('data', (data) => console.log(data));
 };
+
 
 const help = () => {
   Help.display();

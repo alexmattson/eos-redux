@@ -1,5 +1,6 @@
 const Start = require('./start.js');
 const Util = require('../../util/util.js');
+const Config = require('./env_config.js')
 
 //// Generate Helpers ////
 let command = '';
@@ -87,6 +88,14 @@ const server = (name, type) => {
     Start.installDependencies);
 };
 
+const generateService = (type, name) => {
+  // Util.exec(`mkdir ${name} && cd ${name} && touch ${type}.js`);
+  Util.exec(`mkdir ${name}`);
+  Config[type](name);
+  // Util.exec(`cd ${type} && touch ${name}.js`);
+}
+
+
 //APPEND
 const append = (name, type) => {
   const masterFile = type === "middleware" ? "master_middleware" : "root_reducer";
@@ -118,6 +127,7 @@ let Generate = {
   generateComponent: generateComponent,
   setComponentNames: setComponentNames,
   server: server,
+  generateService: generateService,
   append: append
 };
 
