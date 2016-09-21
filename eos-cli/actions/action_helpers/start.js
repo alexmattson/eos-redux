@@ -7,24 +7,33 @@ const createDir = (dir, path) => {
   path = path ? path : '';
   command = `mkdir ${path}${dir}`;
   Util.exec(command);
-  console.log(Util.chalk.green('creating'), `${path}${dir}/`);
+  console.log(Util.chalk.green('created'), `${path}${dir}/`);
 };
 
-const createStartFile = (file, destinationPath) => {
+const createStartFile = (file, destinationPath, callback) => {
   console.log(Util.chalk.blue('creating'), `${destinationPath}${file}`);
 
   Util.npmRoot((npmRoot) => {
     let currentPath =  `${npmRoot}/eos-redux/templates/start/${file}`;
     command = `cp ${currentPath} ${destinationPath}`;
-    Util.exec(command);
+    let name = destinationPath.split('/')[0];
+    if (callback) Util.exec(command, callback(name));
+    else Util.exec(command);
   });
 
 };
 
 const installDependencies = (name) => {
   console.log('Installing dependencies. This could take a few minutes...');
-  Util.exec(`cd ${name} && npm install`);
+  let install = Util.exec(`cd ${name} && npm install`);
+  install.on('close', (code) => {
+    console.log(`Done`);
+    console.log(`IF YOU USE NVM RUN THE FOLLOWING COMMANDS:`);
+    console.log(`cd ${name}`);
+    console.log(`npm install`);
+  });
 };
+
 
 
 // Export
