@@ -1,8 +1,7 @@
 import { applyMiddleware } from 'redux';
-import CarsMiddleware from './cars_middleware';
 
 const masterMiddleware = applyMiddleware(
-	CarsMiddleware
+	//middlewares here
 );
 
 export default masterMiddleware;
