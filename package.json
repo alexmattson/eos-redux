@@ -1,6 +1,6 @@
 {
   "name": "eos-redux",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Redux Framework and CLI",
   "main": "index.js",
   "keywords": ["react", "redux", "cli", "framework"],
