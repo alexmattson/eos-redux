@@ -35,22 +35,22 @@ const generateComponent = (name) => {
   });
 };
 
-let pluralCommand = (file, name) => {
+let pluralCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATES/${Util.snake(Util.pluralize(name)).toUpperCase()}/g' -e 's/templates/${Util.snake(Util.pluralize(name)).toLowerCase()}/g' -e 's/temPlates/${Util.kneelingCamelize(Util.pluralize(name))}/g' -e 's/Templates/${Util.Camelize(Util.pluralize(name))}/g' {} +`
   )
 };
 
-let singularCommand = (file, name) => {
+let singularCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATE/${Util.snake(name).toUpperCase()}/g' -e 's/template/${Util.snake(name).toLowerCase()}/g' -e 's/temPlate/${Util.kneelingCamelize(name)}/g' -e 's/Template/${Util.Camelize(name)}/g' {} +`
   )
 };
 
 const setName = (name, file) => {
-  find_file = `find . -type f -name "*${Util.snake(name)}_${file}*"`;
-  Util.exec(pluralCommand(file, name), () => {
-    Util.exec(singularCommand(file, name));
+  let find_file = `find . -type f -name "*${Util.snake(name)}_${file}*"`;
+  Util.exec(pluralCommand(find_file, name), () => {
+    Util.exec(singularCommand(find_file, name));
   });
 };
 
@@ -62,8 +62,8 @@ const setComponentNames = (name, container) => {
     find_file = `find . -type f -name "*${Util.snake(name)}.jsx*"`;
   }
 
-  Util.exec(pluralCommand(file, name), () => {
-    Util.exec(singularCommand(file, name));
+  Util.exec(pluralCommand(find_file, name), () => {
+    Util.exec(singularCommand(find_file, name));
   });
 };
 
