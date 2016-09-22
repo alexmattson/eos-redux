@@ -20,13 +20,18 @@ const generateFile = (name, file, type, destinationPath) => {
 const generateComponent = (name) => {
 
   Util.npmRoot((npmRoot) => {
+    // component folder
+    Start.createDir(Util.snake(name), 'frontend/components/');
+
+    // component file
     let currentPath = `${npmRoot}/eos-redux/templates/cycle/template.jsx`;
     let destinationPath = `frontend/components/${Util.snake(name)}/`;
+    console.log(Util.chalk.blue('created'), `${destinationPath}${Util.snake(name)}.jsx`);
     command = `cp ${currentPath} ${destinationPath}${Util.snake(name)}.jsx`;
     Util.exec(command);
-    Start.createDir(Util.snake(name), 'frontend/components/');
     setComponentNames(name, false);
 
+    // comonent container
     generateFile(name,
                  'container',
                  'jsx',

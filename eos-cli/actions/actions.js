@@ -61,10 +61,9 @@ const generate = (action, name, ...args) => {
     Generate.generateFile(name, 'api_util', 'js', './frontend/util/');
     Generate.setName(name, 'api_util');
   }
-  if (action === 'service' || cycle) {
-    // Util
+  if (action === 'service') {
+    // Service
     Generate.generateService(name, args[0]);
-    // Generate.setName(name, 'api_util');
   }
 };
 
