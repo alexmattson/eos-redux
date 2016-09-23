@@ -95,7 +95,6 @@ const server = (name, type) => {
 
 const generateService = (type, name) => {
   // Util.exec(`mkdir ${name} && cd ${name} && touch ${type}.js`);
-  Util.exec(`mkdir ${name}`);
   Config[type](name);
   // Util.exec(`cd ${type} && touch ${name}.js`);
 }
