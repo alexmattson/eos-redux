@@ -121,6 +121,14 @@ const backend = (name, type) => {
   Generate.generateService(type, 'server', name, true);
 };
 
+//WEBPACK
+
+const webpack = (watch) => {
+  Util.exec(`cd frontend && webpack --${watch}`).stdout.on('data', function (data) {
+    console.log(data);
+  });
+};
+
 
 // Export
 
@@ -130,7 +138,8 @@ let actions = {
   generate: generate,
   remove: remove,
   server: server,
-  help: help
+  help: help,
+  webpack: webpack
 };
 
 module.exports = actions;

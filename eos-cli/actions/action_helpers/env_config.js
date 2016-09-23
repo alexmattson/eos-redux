@@ -11,7 +11,7 @@ const defaultExpress = (path, name) => {
     && mkdir static \
     && echo "${Servers.express()}" >> ${name}.js \
     && npm init --yes \
-    && npm install --save express \
+    && npm install --save express morgan \
   `);
 };
 
@@ -21,7 +21,7 @@ const express = (name) => {
     && cd ${name} \
     && echo "${Servers.express()}" >> ${name}.js \
     && npm init --yes \
-    && npm install --save express \
+    && npm install --save express morgan \
   `);
 };
 

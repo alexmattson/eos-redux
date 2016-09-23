@@ -2,9 +2,12 @@ const express = () => {
   return `const express = require('express');
 const app = express();
 var path = require('path');
+var logger = require('morgan');
+
+app.use(logger('dev'));
+app.use(express.static('server/static'));
 
 app.get('/', function(req, res){
-  console.log('Hello.  Node Server is running');
   res.sendFile(path.resolve('frontend/index.html'));
 });
 

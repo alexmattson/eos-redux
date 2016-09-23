@@ -225,7 +225,23 @@ Alternate syntax:
 ```
 eos rm [type] [name]
 ```
+### <a id="webpack"></a> Webpack
 
+Run Webpack from the root directory of a project with a default server.
+
+```
+eos webpack
+```
+
+Runs ```webpack``` once in the frontend directory.
+
+```
+eos webpack watch
+```
+
+runs ```webpack --watch``` in the frontend directory. Note the slight difference in syntax here.
+
+To enable colorized output from webpack, just do ```cd frontend && webpack``` from the root directory.
 
 ### <a id="action-server"></a> Server
 
