@@ -8,6 +8,7 @@ const defaultExpress = (path, name) => {
     cd ${path} \
     && mkdir ${name} \
     && cd ${name} \
+    && mkdir static \
     && echo "${Servers.express()}" >> ${name}.js \
     && npm init --yes \
     && npm install --save express \
