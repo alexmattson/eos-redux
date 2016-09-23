@@ -13,6 +13,7 @@
     * [middleware](#generate-middleware)
     * [reducer](#generate-reducer)
     * [api_util](#generate-api_util)
+    * [service](#generate-service)
   - [Remove](#action-remove)
   - [Server](#action-server)
 * [Development](#development)
@@ -209,11 +210,42 @@ eos generate api_util [name]
 ```
 
 Generates api_util file.
-
 ```
 util/
-  [name]_api_util.js
+[name]_api_util.js
 ```
+
+##### <a id="generate-service"></a>
+```Bash
+eos g service [framework] [name]
+```
+
+Generates a server with its own associated environment.  It is totally independent
+anything else in the project folder and can be deployed as its own app.
+
+Example:
+```Bash
+eos g service express static_file_server
+```
+will create the following file structure:
+```
+[project root]/
+  static_file_server/
+    static_file_server.js
+    package.json
+```
+On `eos start [project name]` (unless `--backend none` is added) this command is run as
+follows to setup a default server.
+```Bash
+eos g service express server
+```
+
+Currently supported frameworks:
+-Express
+-Flask (in progress)
+-Rails (in progress)
+-Rack (coming soon)
+
 ### <a id="action-remove"></a> Remove
 
 Remove follows the same syntax as generate and directly reverses any action that generate makes. It can be used on the full redux cycle or on any individual portion.
