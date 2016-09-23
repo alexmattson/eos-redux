@@ -26,19 +26,19 @@ import { requestTemplates,
    const temPlateErrored = data => dispatch(templateError(data.responseJSON));
    switch(action.type){
      case REQUEST_TEMPLATES:
-       fetchTemplates(templatesSuccess);
+       fetchTemplates(temPlatesSuccess);
        return next(action);
      case REQUEST_TEMPLATE:
-       fetchTemplate(action.id, templateSuccess);
+       fetchTemplate(action.id, temPlateSuccess);
        return next(action);
      case CREATE_TEMPLATE:
-       createTemplate(action.template, templateSuccess, templateErrored);
+       createTemplate(action.template, temPlateSuccess, temPlateErrored);
        return next(action);
      case UPDATE_TEMPLATE:
-       updateTemplate(action.template, templateSuccess);
+       updateTemplate(action.template, temPlateSuccess);
        return next(action);
      case DESTROY_TEMPLATE:
-       destroyTemplate(action.template, templateRemoved);
+       destroyTemplate(action.template, temPlateRemoved);
        return next(action);
      default:
        return next(action);

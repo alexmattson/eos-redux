@@ -5,10 +5,9 @@ import { requestTemplates,
          createTemplate,
          destroyTemplate
        } from '../../actions/template_actions';
-import { allTemplates } from '../../reducers/selectors';
 
 const mapStateToProps = state => ({
-  templates: allTemplates(state)
+  templates: state.templates
 });
 
 const mapDispatchToProps = dispatch => ({
