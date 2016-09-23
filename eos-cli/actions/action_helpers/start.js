@@ -11,7 +11,7 @@ const createDir = (dir, path) => {
 };
 
 const createStartFile = (file, destinationPath, callback) => {
-  console.log(Util.chalk.blue('creating'), `${destinationPath}${file}`);
+  console.log(Util.chalk.blue('created'), `${destinationPath}${file}`);
 
   Util.npmRoot((npmRoot) => {
     let currentPath =  `${npmRoot}/eos-redux/templates/start/${file}`;
