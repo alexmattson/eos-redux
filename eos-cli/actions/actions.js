@@ -30,6 +30,11 @@ const start = (name) => {
       Start.createStartFile(`index.jsx`, `${name}/frontend/`);
     //creates .gitignore from command line to solve nvm issue
     Util.exec(`cd ${name} && echo 'node_modules/\nbundle.js\nbundle.js.map' >> .gitignore`);
+    Generate.generateWebpack('express', name);
+    Generate.generatePackageJSON(name);
+    Util.exec(`cd ${name}/frontend && npm install`);
+    //default setting.  TODO: add if block for conditional with `--backend none`
+    // Generate.generateService('express', 'server');
 };
 
 const generate = (action, name, ...args) => {
@@ -106,8 +111,13 @@ const help = () => {
 // OPTION ACTIONS //
 
 const backend = (name, type) => {
+  name = name || 'server';
+  type = type || 'express';
   name = Util.snake(name);
-  Generate.server(name, type);
+  console.log("NAME" + name);
+  console.log("TYPE" + type);
+  Util.exec(`cd ${name}`);
+  Generate.generateService(type, 'server', name, true);
 };
 
 
