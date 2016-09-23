@@ -1,10 +1,11 @@
 const express = () => {
   return `const express = require('express');
 const app = express();
+var path = require('path');
 
 app.get('/', function(req, res){
   console.log('Hello.  Node Server is running');
-  res.sendFile(__dirname + '/static/index.html');
+  res.sendFile(path.resolve('frontend/index.html'));
 });
 
 if (module === require.main) {

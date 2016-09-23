@@ -15,6 +15,7 @@ const start = (name) => {
   // Indented according to file structure
   Start.createDir(`${name}`);
     Start.createDir(`${name}/frontend`);
+      Start.createStartFile(`index/index.html`, `${name}/frontend`);
       Start.createDir(`actions`, `${name}/frontend/`);
       Start.createDir(`components`, `${name}/frontend/`);
         Start.createStartFile(`root.jsx`, `${name}/frontend/components/`);

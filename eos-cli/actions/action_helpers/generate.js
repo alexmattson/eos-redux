@@ -46,13 +46,13 @@ const generateComponent = (name) => {
 let pluralCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATES/${Util.snake(Util.pluralize(name)).toUpperCase()}/g' -e 's/templates/${Util.snake(Util.pluralize(name)).toLowerCase()}/g' -e 's/temPlates/${Util.kneelingCamelize(Util.pluralize(name))}/g' -e 's/Templates/${Util.Camelize(Util.pluralize(name))}/g' {} +`
-  )
+  );
 };
 
 let singularCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATE/${Util.snake(name).toUpperCase()}/g' -e 's/template/${Util.snake(name).toLowerCase()}/g' -e 's/temPlate/${Util.kneelingCamelize(name)}/g' -e 's/Template/${Util.Camelize(name)}/g' {} +`
-  )
+  );
 };
 
 const setName = (name, file) => {
@@ -102,7 +102,7 @@ const generateService = (type, name, path, defaultServer=false) => {
   } else {
     Config[type](name);
   }
-}
+};
 
 
 //APPEND
@@ -140,7 +140,7 @@ const generateWebpack = (framework, name) => {
 
 const generatePackageJSON = (name) => {
   const packageJSON = PackageJSONSetup();
-  console.log(packageJSON)
+  console.log(packageJSON);
   Util.exec(`
     cd ${name}/frontend \
     && echo '${packageJSON}' >> package.json \

@@ -1,5 +1,6 @@
 const Util = require('../../util/util.js');
-const Servers = require(`../../../templates/servers/servers.js`)
+const Servers = require(`../../../templates/servers/servers.js`);
+const Start = require('./start.js');
 
 const defaultExpress = (path, name) => {
   console.log('PATH: ' + path, 'NAME: ' + name);
@@ -11,7 +12,7 @@ const defaultExpress = (path, name) => {
     && npm init --yes \
     && npm install --save express \
   `);
-}
+};
 
 const express = (name) => {
   Util.exec(`
@@ -21,7 +22,7 @@ const express = (name) => {
     && npm init --yes \
     && npm install --save express \
   `);
-}
+};
 
 const Config = {
   express: express,
