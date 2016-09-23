@@ -100,7 +100,7 @@ const remove = (action, name) => {
 };
 
 const server = () => {
-  let run = Util.exec('node server/app.js');
+  let run = Util.exec('node server/server.js');
   run.stdout.on('data', (data) => console.log(data));
 };
 

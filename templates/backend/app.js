@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 
+app.use(express.static('static'));
+
 app.get('/', function(req, res){
   console.log("Hello.  Node Server is running");
-  res.send("Hello.  Node Server is running");
+  res.sendFile(__dirname + '/static/index.html');
 });
 
 if (module === require.main) {

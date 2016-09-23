@@ -27,9 +27,9 @@ program
       Actions.remove(env1, env2);
     }
     // Server // DEPRACATED
-    // else if (['server'].includes(cmd)) {
-    //   Actions.server();
-    // }
+    else if (['server'].includes(cmd)) {
+      Actions.server();
+    }
     // Help
     else {
       Actions.help();
