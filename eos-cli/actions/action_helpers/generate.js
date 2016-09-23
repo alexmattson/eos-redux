@@ -85,9 +85,6 @@ const server = (name, type) => {
       path = 'backend/';
       Start.createStartFile(`../${path}app.js`, `${name}/server/`);
   }
-  // Start.createStartFile(`../${path}webpack.config.js`, `${name}/`);
-  // Start.createStartFile(`../${path}package.json`, `${name}/`,
-  //   Start.installDependencies);
 };
 
 const generateService = (type, name, path, defaultServer=false) => {
