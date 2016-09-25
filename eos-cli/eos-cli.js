@@ -26,9 +26,13 @@ program
     else if (['remove', 'rm'].includes(cmd)) {
       Actions.remove(env1, env2);
     }
-    // Server
+    // Server // DEPRACATED
     else if (['server'].includes(cmd)) {
       Actions.server();
+    }
+    // Webpack
+    else if (['webpack'].includes(cmd)) {
+      Actions.webpack(env1);
     }
     // Help
     else {
@@ -37,5 +41,6 @@ program
   })
   .option('-b, --backend [type]');
 
+//TODO: make this work again
 program.parse(process.argv);
 if (start) Actions.backend(name, program.backend);
