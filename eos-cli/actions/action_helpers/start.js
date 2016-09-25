@@ -24,7 +24,7 @@ const createStartFile = (file, destinationPath, callback) => {
 };
 
 const installDependencies = (name) => {
-  console.log('Installing dependencies. This could take a few minutes...');
+  console.log('Installing front end dependencies. This could take a few minutes...');
   let install = Util.exec(`cd ${name}/frontend && npm install`);
   install.on('close', (code) => {
     console.log(`Done`);
