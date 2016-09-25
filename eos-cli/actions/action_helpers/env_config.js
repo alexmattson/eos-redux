@@ -27,7 +27,10 @@ const express = (name) => {
     && echo "${Servers.express()}" >> ${name}.js \
     && npm init --yes \
     && npm install --save express morgan \
-  `);
+  `).on('close', (data) => {
+    console.log(Util.chalk.blue('Created Express Server'));
+    console.log('Installing server dependencies. This could take a few minutes...');
+  });
 };
 
 const pg = (name) => {
