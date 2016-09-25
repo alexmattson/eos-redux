@@ -34,6 +34,10 @@ program
     else if (['webpack'].includes(cmd)) {
       Actions.webpack(env1);
     }
+    //DB
+    else if (['db', 'DB'].includes(cmd)) {
+      Actions.db(env1);
+    }
     // Help
     else {
       Actions.help();

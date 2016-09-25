@@ -137,7 +137,6 @@ const generateWebpack = (framework, name) => {
 
 const generatePackageJSON = (name) => {
   const packageJSON = PackageJSONSetup();
-  console.log(packageJSON);
   Util.exec(`
     cd ${name}/frontend \
     && echo '${packageJSON}' >> package.json \

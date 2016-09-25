@@ -15,7 +15,9 @@
     * [api_util](#generate-api_util)
     * [service](#generate-service)
   - [Remove](#action-remove)
+  - [Webpack](#action-webpack)
   - [Server](#action-server)
+  - [Database](#action-database)
 * [Development](#development)
 
 ## <a id="how-to-install"></a> How to install
@@ -257,7 +259,7 @@ Alternate syntax:
 ```
 eos rm [type] [name]
 ```
-### <a id="webpack"></a> Webpack
+### <a id="action-webpack"></a> Webpack
 
 Run Webpack from the root directory of a project with a default server.
 
@@ -282,6 +284,16 @@ eos server
 ```
 
 If a backend was generated on start, this command starts an Express server listening on port 8000.
+
+### <a id="action-database"></a> Database
+
+```
+eos db create
+```
+
+If a backend was generated on start, use this command to create a Postgres development database for your project.
+
+Ensure you have Postgres. If you need help with this, consult their [wiki](https://wiki.postgresql.org/wiki/Detailed_installation_guides).
 
 ## <a id="development"></a> Development
 

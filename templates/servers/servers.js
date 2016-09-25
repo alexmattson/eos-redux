@@ -45,26 +45,10 @@ if (module === require.main) {
 module.exports = server;`
 };
 
-const pg = () => {
-  return `// Proper way to initialize and share the Database object
-
-// Loading and initializing the library:
-var pgp = require('pg-promise')();
-
-// Preparing the connection details:
-var cn = 'postgres://username:password@host:port/database';
-
-// Creating a new database instance from the connection details:
-var db = pgp(cn);
-
-// Exporting the database object for shared use:
-module.exports = db;`
-};
 
 const Servers = {
   express: express,
-  defaultExpress: defaultExpress,
-  pg: pg
+  defaultExpress: defaultExpress
 };
 
 module.exports = Servers;

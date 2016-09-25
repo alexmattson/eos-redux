@@ -33,7 +33,15 @@ const start = (name) => {
     Util.exec(`cd ${name} && echo 'node_modules/\nbundle.js\nbundle.js.map' >> .gitignore`);
     Generate.generateWebpack('express', name);
     Generate.generatePackageJSON(name);
-    Util.exec(`cd ${name}/frontend && npm install`);
+
+    console.log('Installing front end dependencies. This could take a few minutes...');
+    let install = Util.exec(`cd ${name}/frontend && npm install`);
+    install.on('close', (code) => {
+      console.log(`Done`);
+      console.log(`IF YOU USE NVM RUN THE FOLLOWING COMMANDS:`);
+      console.log(`cd ${name}`);
+      console.log(`npm install`);
+    });
     //default setting.  TODO: add if block for conditional with `--backend none`
     // Generate.generateService('express', 'server');
 };
@@ -127,6 +135,20 @@ const webpack = (watch) => {
   });
 };
 
+//DB
+
+const db = (action) => {
+  if (action === 'create'){
+    let name;
+    Util.exec('pwd').stdout.on('data', function(data) {
+      name = data.split('/').pop();
+      console.log('Creating database ' + name.trim() + '_development');
+    });
+    setTimeout(() => Util.exec(`cd server && psql -f ${name.trim()}_db.sql`)
+      .stdout.on('data', (data)=> console.log(data)), 250);
+  } else console.log('Command not found. Did you mean db create?');
+};
+
 
 // Export
 
@@ -137,7 +159,8 @@ let actions = {
   remove: remove,
   server: server,
   help: help,
-  webpack: webpack
+  webpack: webpack,
+  db: db
 };
 
 module.exports = actions;
