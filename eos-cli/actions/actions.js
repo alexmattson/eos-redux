@@ -115,8 +115,6 @@ const backend = (name, type) => {
   name = name || 'server';
   type = type || 'express';
   name = Util.snake(name);
-  console.log("NAME" + name);
-  console.log("TYPE" + type);
   Util.exec(`cd ${name}`);
   Generate.generateService(type, 'server', name, true);
 };

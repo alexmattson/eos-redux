@@ -3,15 +3,16 @@ const Servers = require(`../../../templates/servers/servers.js`);
 const Start = require('./start.js');
 
 const defaultExpress = (path, name) => {
-  console.log('PATH: ' + path, 'NAME: ' + name);
+  console.log(`Generating Express server.`);
   Util.exec(`
     cd ${path} \
     && mkdir ${name} \
     && cd ${name} \
     && mkdir static \
-    && echo "${Servers.express()}" >> ${name}.js \
+    && echo "${Servers.defaultExpress()}" >> ${name}.js \
     && npm init --yes \
-    && npm install --save express morgan \
+    && npm install --save express morgan pg-promise \
+    && echo "${Servers.pg()}" >> pg.js \
   `);
 };
 
