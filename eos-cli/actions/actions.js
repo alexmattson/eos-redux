@@ -15,6 +15,7 @@ const start = (name) => {
   // Indented according to file structure
   Start.createDir(`${name}`);
     Start.createDir(`${name}/frontend`);
+      Start.createStartFile(`index/index.html`, `${name}/frontend`);
       Start.createDir(`actions`, `${name}/frontend/`);
       Start.createDir(`components`, `${name}/frontend/`);
         Start.createStartFile(`root.jsx`, `${name}/frontend/components/`);
@@ -30,6 +31,19 @@ const start = (name) => {
       Start.createStartFile(`index.jsx`, `${name}/frontend/`);
     //creates .gitignore from command line to solve nvm issue
     Util.exec(`cd ${name} && echo 'node_modules/\nbundle.js\nbundle.js.map' >> .gitignore`);
+    Generate.generateWebpack('express', name);
+    Generate.generatePackageJSON(name);
+
+    console.log('Installing front end dependencies. This could take a few minutes...');
+    let install = Util.exec(`cd ${name}/frontend && npm install`);
+    install.on('close', (code) => {
+      console.log(`Done`);
+      console.log(`IF YOU USE NVM RUN THE FOLLOWING COMMANDS:`);
+      console.log(`cd ${name}`);
+      console.log(`npm install`);
+    });
+    //default setting.  TODO: add if block for conditional with `--backend none`
+    // Generate.generateService('express', 'server');
 };
 
 const generate = (action, name, ...args) => {
@@ -94,7 +108,7 @@ const remove = (action, name) => {
 };
 
 const server = () => {
-  let run = Util.exec('node server/app.js');
+  let run = Util.exec('node server/server.js');
   run.stdout.on('data', (data) => console.log(data));
 };
 
@@ -106,8 +120,33 @@ const help = () => {
 // OPTION ACTIONS //
 
 const backend = (name, type) => {
+  name = name || 'server';
+  type = type || 'express';
   name = Util.snake(name);
-  Generate.server(name, type);
+  Util.exec(`cd ${name}`);
+  Generate.generateService(type, 'server', name, true);
+};
+
+//WEBPACK
+
+const webpack = (watch) => {
+  Util.exec(`cd frontend && webpack --${watch}`).stdout.on('data', function (data) {
+    console.log(data);
+  });
+};
+
+//DB
+
+const db = (action) => {
+  if (action === 'create'){
+    let name;
+    Util.exec('pwd').stdout.on('data', function(data) {
+      name = data.split('/').pop();
+      console.log('Creating database ' + name.trim() + '_development');
+    });
+    setTimeout(() => Util.exec(`cd server && psql -f ${name.trim()}_db.sql`)
+      .stdout.on('data', (data)=> console.log(data)), 250);
+  } else console.log('Command not found. Did you mean db create?');
 };
 
 
@@ -119,7 +158,9 @@ let actions = {
   generate: generate,
   remove: remove,
   server: server,
-  help: help
+  help: help,
+  webpack: webpack,
+  db: db
 };
 
 module.exports = actions;

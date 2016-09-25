@@ -13,8 +13,11 @@
     * [middleware](#generate-middleware)
     * [reducer](#generate-reducer)
     * [api_util](#generate-api_util)
+    * [service](#generate-service)
   - [Remove](#action-remove)
+  - [Webpack](#action-webpack)
   - [Server](#action-server)
+  - [Database](#action-database)
 * [Development](#development)
 
 ## <a id="how-to-install"></a> How to install
@@ -209,11 +212,42 @@ eos generate api_util [name]
 ```
 
 Generates api_util file.
-
 ```
 util/
-  [name]_api_util.js
+[name]_api_util.js
 ```
+
+##### <a id="generate-service"></a>
+```Bash
+eos g service [framework] [name]
+```
+
+Generates a server with its own associated environment.  It is totally independent
+anything else in the project folder and can be deployed as its own app.
+
+Example:
+```Bash
+eos g service express static_file_server
+```
+will create the following file structure:
+```
+[project root]/
+  static_file_server/
+    static_file_server.js
+    package.json
+```
+On `eos start [project name]` (unless `--backend none` is added) this command is run as
+follows to setup a default server.
+```Bash
+eos g service express server
+```
+
+Currently supported frameworks:
+-Express
+-Flask (in progress)
+-Rails (in progress)
+-Rack (coming soon)
+
 ### <a id="action-remove"></a> Remove
 
 Remove follows the same syntax as generate and directly reverses any action that generate makes. It can be used on the full redux cycle or on any individual portion.
@@ -225,7 +259,23 @@ Alternate syntax:
 ```
 eos rm [type] [name]
 ```
+### <a id="action-webpack"></a> Webpack
 
+Run Webpack from the root directory of a project with a default server.
+
+```
+eos webpack
+```
+
+Runs ```webpack``` once in the frontend directory.
+
+```
+eos webpack watch
+```
+
+runs ```webpack --watch``` in the frontend directory. Note the slight difference in syntax here.
+
+To enable colorized output from webpack, just do ```cd frontend && webpack``` from the root directory.
 
 ### <a id="action-server"></a> Server
 
@@ -234,6 +284,16 @@ eos server
 ```
 
 If a backend was generated on start, this command starts an Express server listening on port 8000.
+
+### <a id="action-database"></a> Database
+
+```
+eos db create
+```
+
+If a backend was generated on start, use this command to create a Postgres development database for your project.
+
+Ensure you have Postgres. If you need help with this, consult their [wiki](https://wiki.postgresql.org/wiki/Detailed_installation_guides).
 
 ## <a id="development"></a> Development
 
