@@ -26,7 +26,7 @@ program
     else if (['remove', 'rm'].includes(cmd)) {
       Actions.remove(env1, env2);
     }
-    // Server // DEPRACATED
+    // Server
     else if (['server'].includes(cmd)) {
       Actions.server();
     }

@@ -215,17 +215,18 @@ util/
 [name]_api_util.js
 ```
 
-##### <a id="generate-service"></a>
-```Bash
-eos g service [framework] [name]
+##### <a id="generate-service"></a> Service
+
+```
+eos generate service [framework] [name]
 ```
 
 Generates a server with its own associated environment.  It is totally independent
 anything else in the project folder and can be deployed as its own app.
 
 Example:
-```Bash
-eos g service express static_file_server
+```
+eos generate service express static_file_server
 ```
 will create the following file structure:
 ```
