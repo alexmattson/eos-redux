@@ -243,7 +243,7 @@ eos g service express server
 
 Currently supported frameworks:
 -Express
--Flask (in progress)
+-Flask
 -Rails (in progress)
 -Rack (coming soon)
 

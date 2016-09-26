@@ -32,7 +32,7 @@ const express = (name) => {
 
 const flask = (name) => {
   Util.exec(`
-    echo 'venv/' >> .gitignore \
+    echo 'venv/\n__pycache__\n*.pyc' >> .gitignore \
     && mkdir ${name} \
     && cd ${name} \
     && echo "${Servers.flask()}" >> ${name}.py \
@@ -50,7 +50,7 @@ const flask = (name) => {
 
 const Config = {
   express: express,
-  flask: flask
+  flask: flask,
   defaultExpress: defaultExpress
 };
 
