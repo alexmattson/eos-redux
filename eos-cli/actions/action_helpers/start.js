@@ -11,7 +11,7 @@ const createDir = (dir, path) => {
 };
 
 const createStartFile = (file, destinationPath, callback) => {
-  console.log(Util.chalk.blue('creating'), `${destinationPath}${file}`);
+  console.log(Util.chalk.blue('created'), `${destinationPath}${file}`);
 
   Util.npmRoot((npmRoot) => {
     let currentPath =  `${npmRoot}/eos-redux/templates/start/${file}`;
@@ -24,8 +24,8 @@ const createStartFile = (file, destinationPath, callback) => {
 };
 
 const installDependencies = (name) => {
-  console.log('Installing dependencies. This could take a few minutes...');
-  let install = Util.exec(`cd ${name} && npm install`);
+  console.log('Installing front end dependencies. This could take a few minutes...');
+  let install = Util.exec(`cd ${name}/frontend && npm install`);
   install.on('close', (code) => {
     console.log(`Done`);
     console.log(`IF YOU USE NVM RUN THE FOLLOWING COMMANDS:`);

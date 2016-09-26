@@ -1,5 +1,8 @@
 const Start = require('./start.js');
 const Util = require('../../util/util.js');
+const Config = require('./env_config.js');
+const WPSetup = require('../../../templates/frontend/webpack_setup.js');
+const PackageJSONSetup = require('../../../templates/frontend/package_setup.js');
 
 //// Generate Helpers ////
 let command = '';
@@ -19,13 +22,18 @@ const generateFile = (name, file, type, destinationPath) => {
 const generateComponent = (name) => {
 
   Util.npmRoot((npmRoot) => {
+    // component folder
+    Start.createDir(Util.snake(name), 'frontend/components/');
+
+    // component file
     let currentPath = `${npmRoot}/eos-redux/templates/cycle/template.jsx`;
     let destinationPath = `frontend/components/${Util.snake(name)}/`;
+    console.log(Util.chalk.blue('created'), `${destinationPath}${Util.snake(name)}.jsx`);
     command = `cp ${currentPath} ${destinationPath}${Util.snake(name)}.jsx`;
     Util.exec(command);
-    Start.createDir(Util.snake(name), 'frontend/components/');
     setComponentNames(name, false);
 
+    // comonent container
     generateFile(name,
                  'container',
                  'jsx',
@@ -35,22 +43,22 @@ const generateComponent = (name) => {
   });
 };
 
-let pluralCommand = (file, name) => {
+let pluralCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATES/${Util.snake(Util.pluralize(name)).toUpperCase()}/g' -e 's/templates/${Util.snake(Util.pluralize(name)).toLowerCase()}/g' -e 's/temPlates/${Util.kneelingCamelize(Util.pluralize(name))}/g' -e 's/Templates/${Util.Camelize(Util.pluralize(name))}/g' {} +`
-  )
+  );
 };
 
-let singularCommand = (file, name) => {
+let singularCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATE/${Util.snake(name).toUpperCase()}/g' -e 's/template/${Util.snake(name).toLowerCase()}/g' -e 's/temPlate/${Util.kneelingCamelize(name)}/g' -e 's/Template/${Util.Camelize(name)}/g' {} +`
-  )
+  );
 };
 
 const setName = (name, file) => {
-  find_file = `find . -type f -name "*${Util.snake(name)}_${file}*"`;
-  Util.exec(pluralCommand(file, name), () => {
-    Util.exec(singularCommand(file, name));
+  let find_file = `find . -type f -name "*${Util.snake(name)}_${file}*"`;
+  Util.exec(pluralCommand(find_file, name), () => {
+    Util.exec(singularCommand(find_file, name));
   });
 };
 
@@ -62,12 +70,12 @@ const setComponentNames = (name, container) => {
     find_file = `find . -type f -name "*${Util.snake(name)}.jsx*"`;
   }
 
-  Util.exec(pluralCommand(file, name), () => {
-    Util.exec(singularCommand(file, name));
+  Util.exec(pluralCommand(find_file, name), () => {
+    Util.exec(singularCommand(find_file, name));
   });
 };
 
-//Server
+//Server DEPRECATED
 const server = (name, type) => {
 
   let path = '';
@@ -82,10 +90,17 @@ const server = (name, type) => {
       path = 'backend/';
       Start.createStartFile(`../${path}app.js`, `${name}/server/`);
   }
-  Start.createStartFile(`../${path}webpack.config.js`, `${name}/`);
-  Start.createStartFile(`../${path}package.json`, `${name}/`,
-    Start.installDependencies);
 };
+
+const generateService = (type, name, path, defaultServer=false) => {
+  if(type === 'none'){return;}
+  if(defaultServer){
+    Config.defaultExpress(path, name);
+  } else {
+    Config[type](name);
+  }
+};
+
 
 // Append to Master Files
 const append = (name, type) => {
@@ -106,6 +121,24 @@ const append = (name, type) => {
     `${Util.Camelize(name)}${Util.Camelize(type)} to ${Util.Camelize(masterFile)}`);
 };
 
+const generateWebpack = (framework, name) => {
+  const wpConfig = WPSetup('dev', framework);
+  const wpConfigProd = WPSetup('prod', framework);
+  Util.exec(`
+    cd ${name}/frontend \
+    && echo "${wpConfig}" >> webpack.config.js \
+    && echo "${wpConfigProd}" >> webpack_prod.config.js
+  `);
+};
+
+const generatePackageJSON = (name) => {
+  const packageJSON = PackageJSONSetup();
+  Util.exec(`
+    cd ${name}/frontend \
+    && echo '${packageJSON}' >> package.json \
+  `);
+};
+
 // Export
 
 let Generate = {
@@ -114,6 +147,9 @@ let Generate = {
   generateComponent: generateComponent,
   setComponentNames: setComponentNames,
   server: server,
+  generateService: generateService,
+  generateWebpack: generateWebpack,
+  generatePackageJSON: generatePackageJSON,
   append: append
 };
 
