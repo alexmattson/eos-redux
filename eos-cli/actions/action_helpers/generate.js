@@ -92,13 +92,6 @@ const server = (name, type) => {
   }
 };
 
-<<<<<<< HEAD
-const generateService = (type, name) => {
-  // Util.exec(`mkdir ${name} && cd ${name} && touch ${type}.js`);
-  Config[type](name);
-  // Util.exec(`cd ${type} && touch ${name}.js`);
-}
-=======
 const generateService = (type, name, path, defaultServer=false) => {
   if(type === 'none'){return;}
   if(defaultServer){
@@ -107,8 +100,6 @@ const generateService = (type, name, path, defaultServer=false) => {
     Config[type](name);
   }
 };
->>>>>>> master
-
 
 //APPEND
 const append = (name, type) => {

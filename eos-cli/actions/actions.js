@@ -30,7 +30,7 @@ const start = (name) => {
       Start.createDir(`util`, `${name}/frontend/`);
       Start.createStartFile(`index.jsx`, `${name}/frontend/`);
     //creates .gitignore from command line to solve nvm issue
-    Util.exec(`cd ${name} && echo 'node_modules/\nbundle.js\nbundle.js.map' >> .gitignore`);
+    Util.exec(`cd ${name} && echo 'node_modules/\nbundle.js\nbundle.js.map\n.DS_Store' >> .gitignore`);
     Generate.generateWebpack('express', name);
     Generate.generatePackageJSON(name);
 

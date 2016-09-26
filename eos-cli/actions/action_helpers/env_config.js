@@ -41,8 +41,11 @@ const flask = (name) => {
     && source venv/bin/activate \
     && pip install flask \
     && pip freeze > requirements.txt \
-    && deactivate
-  `)
+    && deactivate \
+  `).on('close', (data) => {
+    console.log(Util.chalk.blue('Created Flask Server'));
+    console.log('Installing server dependencies. This could take a few minutes...');
+  });
 };
 
 const Config = {
