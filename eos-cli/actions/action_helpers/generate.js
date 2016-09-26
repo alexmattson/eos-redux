@@ -1,6 +1,8 @@
 const Start = require('./start.js');
 const Util = require('../../util/util.js');
-const Config = require('./env_config.js')
+const Config = require('./env_config.js');
+const WPSetup = require('../../../templates/frontend/webpack_setup.js');
+const PackageJSONSetup = require('../../../templates/frontend/package_setup.js');
 
 //// Generate Helpers ////
 let command = '';
@@ -44,13 +46,13 @@ const generateComponent = (name) => {
 let pluralCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATES/${Util.snake(Util.pluralize(name)).toUpperCase()}/g' -e 's/templates/${Util.snake(Util.pluralize(name)).toLowerCase()}/g' -e 's/temPlates/${Util.kneelingCamelize(Util.pluralize(name))}/g' -e 's/Templates/${Util.Camelize(Util.pluralize(name))}/g' {} +`
-  )
+  );
 };
 
 let singularCommand = (find_file, name) => {
   return (
     `${find_file} -exec sed -i "" -e 's/TEMPLATE/${Util.snake(name).toUpperCase()}/g' -e 's/template/${Util.snake(name).toLowerCase()}/g' -e 's/temPlate/${Util.kneelingCamelize(name)}/g' -e 's/Template/${Util.Camelize(name)}/g' {} +`
-  )
+  );
 };
 
 const setName = (name, file) => {
@@ -73,7 +75,7 @@ const setComponentNames = (name, container) => {
   });
 };
 
-//Server
+//Server DEPRECATED
 const server = (name, type) => {
 
   let path = '';
@@ -88,16 +90,24 @@ const server = (name, type) => {
       path = 'backend/';
       Start.createStartFile(`../${path}app.js`, `${name}/server/`);
   }
-  Start.createStartFile(`../${path}webpack.config.js`, `${name}/`);
-  Start.createStartFile(`../${path}package.json`, `${name}/`,
-    Start.installDependencies);
 };
 
+<<<<<<< HEAD
 const generateService = (type, name) => {
   // Util.exec(`mkdir ${name} && cd ${name} && touch ${type}.js`);
   Config[type](name);
   // Util.exec(`cd ${type} && touch ${name}.js`);
 }
+=======
+const generateService = (type, name, path, defaultServer=false) => {
+  if(type === 'none'){return;}
+  if(defaultServer){
+    Config.defaultExpress(path, name);
+  } else {
+    Config[type](name);
+  }
+};
+>>>>>>> master
 
 
 //APPEND
@@ -123,6 +133,24 @@ const append = (name, type) => {
     `${Util.Camelize(name)}${Util.Camelize(type)} to ${Util.Camelize(masterFile)}`);
 };
 
+const generateWebpack = (framework, name) => {
+  const wpConfig = WPSetup('dev', framework);
+  const wpConfigProd = WPSetup('prod', framework);
+  Util.exec(`
+    cd ${name}/frontend \
+    && echo "${wpConfig}" >> webpack.config.js \
+    && echo "${wpConfigProd}" >> webpack_prod.config.js
+  `);
+};
+
+const generatePackageJSON = (name) => {
+  const packageJSON = PackageJSONSetup();
+  Util.exec(`
+    cd ${name}/frontend \
+    && echo '${packageJSON}' >> package.json \
+  `);
+};
+
 // Export
 
 let Generate = {
@@ -132,6 +160,8 @@ let Generate = {
   setComponentNames: setComponentNames,
   server: server,
   generateService: generateService,
+  generateWebpack: generateWebpack,
+  generatePackageJSON: generatePackageJSON,
   append: append
 };
 

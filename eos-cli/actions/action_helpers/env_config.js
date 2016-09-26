@@ -1,13 +1,33 @@
 const Util = require('../../util/util.js');
-const Servers = require(`../../../templates/servers/servers.js`)
+const Servers = require(`../../../templates/servers/servers.js`);
+const Start = require('./start.js');
+
+const defaultExpress = (path, name) => {
+  Util.exec(`
+    cd ${path} \
+    && mkdir ${name} \
+    && cd ${name} \
+    && mkdir static \
+    && echo "${Servers.express()}" >> ${name}.js \
+    && npm init --yes \
+    && npm install --save express morgan \
+  `).on('close', (data) => {
+    console.log(Util.chalk.blue('Created Express Server'));
+    console.log('Installing server dependencies. This could take a few minutes...');
+  });
+};
 
 const express = (name) => {
   Util.exec(`
-    cd ${name} \
+    mkdir ${name} \
+    && cd ${name} \
     && echo "${Servers.express()}" >> ${name}.js \
     && npm init --yes \
-    && npm install --save express \
-  `);
+    && npm install --save express morgan \
+    `).on('close', (data) => {
+    console.log(Util.chalk.blue('Created Express Server'));
+    console.log('Installing server dependencies. This could take a few minutes...');
+  });
 };
 
 const flask = (name) => {
@@ -28,6 +48,7 @@ const flask = (name) => {
 const Config = {
   express: express,
   flask: flask
+  defaultExpress: defaultExpress
 };
 
 module.exports = Config;

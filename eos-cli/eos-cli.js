@@ -30,6 +30,10 @@ program
     else if (['server'].includes(cmd)) {
       Actions.server();
     }
+    // Webpack
+    else if (['webpack'].includes(cmd)) {
+      Actions.webpack(env1);
+    }
     // Help
     else {
       Actions.help();
@@ -37,5 +41,6 @@ program
   })
   .option('-b, --backend [type]');
 
+//TODO: make this work again
 program.parse(process.argv);
 if (start) Actions.backend(name, program.backend);
