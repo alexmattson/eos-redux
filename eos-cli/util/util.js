@@ -1,6 +1,6 @@
 // MISC //
-
 const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 const chalk = require('chalk');
 const snake = require('to-snake-case');
 const pluralize = require('pluralize');
@@ -29,6 +29,7 @@ const npmRoot = (callback) => {
 
 let Util = {
   exec: exec,
+  execSync: execSync,
   chalk: chalk,
   snake: snake,
   kneelingCamelize: kneelingCamelize,
