@@ -101,22 +101,23 @@ const generateService = (type, name, path, defaultServer=false) => {
   }
 };
 
+<<<<<<< HEAD
 //APPEND
+=======
+
+// Append to Master Files
+>>>>>>> master
 const append = (name, type) => {
   const masterFile = type === "middleware" ? "master_middleware" : "root_reducer";
-  const appliedFile = () => {
-    if (type === "middleware") {
-      return `${Util.Camelize(name)}Middleware`;
-    } else {
-      return `${Util.snake(name)}: ${Util.Camelize(name)}Reducer`;
-    }
-  };
+  const appliedFile = type === "middleware"
+    ? `${Util.Camelize(name)}Middleware`
+    : `${Util.snake(name)}: ${Util.Camelize(name)}Reducer`;
 
   const file = `find . -type f -name "*${masterFile}*"`;
   command = `${file} -exec sed -i "" -e "/import.*'redux';/a \\\\
   import ${Util.Camelize(name)}${Util.Camelize(type)} from './${Util.snake(name)}_${type}';" -e '/);/ i \\
-  ${appliedFile()}' -e '/${Util.Camelize(type)}$/ s/$/,/' {} +`;
-  let tabFixCommand = `${file} -exec sed -i "" -e '/${Util.Camelize(type)}$/ s/^/\\'$'\\t''/' {} +`;
+  ${appliedFile}' -e '/${Util.Camelize(type)}$/ s/$/,/' {} +`;
+  let tabFixCommand = `${file} -exec sed -i "" -E -e '/${Util.Camelize(type)}$/ s/^/  /' {} +`;
   Util.exec(command, () => {
     Util.exec(tabFixCommand);
   });

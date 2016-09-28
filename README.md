@@ -2,6 +2,14 @@
 
 ![eos.png](https://s10.postimg.org/7hfcpvwpl/eos.png)
 
+## Overview
+
+#### Description
+EOS is an npm package that allows you to have a full redux application up and running in only a few lines of code in the console!
+
+#### Vision
+We are a team that strives to make coding simple and efficient, and we are working to make the React-Redux paradigm easier to get up and running and more accessible for everyone!
+
 ## Table of contents
 * [How to install](#how-to-install)
 * [How to use](#how-to-use)
@@ -242,10 +250,10 @@ eos g service express server
 ```
 
 Currently supported frameworks:
--Express
--Flask
--Rails (in progress)
--Rack (coming soon)
+- Express
+- Flask
+- Rails (in progress)
+- Rack (coming soon)
 
 ### <a id="action-remove"></a> Remove
 
