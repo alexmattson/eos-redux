@@ -101,8 +101,12 @@ const generateService = (type, name, path, defaultServer=false) => {
   }
 };
 
+<<<<<<< HEAD
+//APPEND
+=======
 
 // Append to Master Files
+>>>>>>> master
 const append = (name, type) => {
   const masterFile = type === "middleware" ? "master_middleware" : "root_reducer";
   const appliedFile = type === "middleware"
