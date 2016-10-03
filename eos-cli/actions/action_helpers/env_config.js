@@ -1,5 +1,7 @@
 const Util = require('../../util/util.js');
 const Servers = require(`../../../templates/servers/servers.js`);
+const Routers = require(`../../../templates/servers/routers.js`);
+const Controllers = require(`../../../templates/servers/controllers.js`);
 const Start = require('./start.js');
 
 const defaultExpress = (path, name) => {
@@ -9,6 +11,8 @@ const defaultExpress = (path, name) => {
     && cd ${name} \
     && mkdir static \
     && echo "${Servers.express()}" >> ${name}.js \
+    && echo "${Routers.express()}" >> routes.js \
+    && echo "${Controllers.express()}" >> controller.js \
     && npm init --yes \
     && npm install --save express morgan \
   `).on('close', (data) => {
@@ -22,6 +26,8 @@ const express = (name) => {
     mkdir ${name} \
     && cd ${name} \
     && echo "${Servers.express()}" >> ${name}.js \
+    && echo "${Routers.express()}" >> routes.js \
+    && echo "${Controllers.express()}" >> controller.js \
     && npm init --yes \
     && npm install --save express morgan \
     `).on('close', (data) => {

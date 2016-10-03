@@ -1,14 +1,62 @@
 const express = () => {
   return `const express = require('express');
 const app = express();
-var path = require('path');
-var logger = require('morgan');
+const Routes = require('./routes');
+const Controller = require('./controller');
+const path = require('path');
+const logger = require('morgan');
 
 app.use(logger('dev'));
 app.use(express.static('server/static'));
 
-app.get('/', function(req, res){
-  res.sendFile(path.resolve('frontend/index.html'));
+app.get(/\\/*/, function(req, res){
+  const action = Routes.GET[req.path];
+  if(!action){
+    res.status(404).send('ERROR 404: Route Not Found');
+  } else {
+    response = Controller[action]();
+    res.send(response);
+  }
+});
+
+app.post(/\\/*/, function(req, res){
+  const action = Routes.POST[req.path];
+  if(!action){
+    res.status(404).send('ERROR 404: Route Not Found');
+  } else {
+    response = Controller[action]();
+    res.send(response);
+  }
+});
+
+app.put(/\\/*/, function(req, res){
+  const action = Routes.PUT[req.path];
+  if(!action){
+    res.status(404).send('ERROR 404: Route Not Found');
+  } else {
+    response = Controller[action]();
+    res.send(response);
+  }
+});
+
+app.patch(/\\/*/, function(req, res){
+  const action = Routes.PATCH[req.path];
+  if(!action){
+    res.status(404).send('ERROR 404: Route Not Found');
+  } else {
+    response = Controller[action]();
+    res.send(response);
+  }
+});
+
+app.delete(/\\/*/, function(req, res){
+  const action = Routes.DELETE[req.path];
+  if(!action){
+    res.status(404).send('ERROR 404: Route Not Found');
+  } else {
+    response = Controller[action]();
+    res.send(response);
+  }
 });
 
 if (module === require.main) {
@@ -56,4 +104,4 @@ const Servers = {
   flask: flask
 };
 
-module.exports = Servers
+module.exports = Servers;
