@@ -1,24 +1,10 @@
 const express = () => {
-  return `const GET = {
-  '/': 'root'
-  //<route>: <controller action>
-};
+  return `const [GET, POST, PUT, PATCH, DELETE] = [{}, {}, {}, {}, {}];
 
-const POST = {
-  //<route>: <controller action>
-};
+GET['/'] = 'root'
 
-const PUT = {
-  //<route>: <controller action>
-};
-
-const PATCH = {
-  //<route>: <controller action>
-};
-
-const DELETE = {
-  //<route>: <controller action>
-};
+//to add routes:
+//<METHOD>[<route>] = <controller action>
 
 const Routes = {
   GET: GET,
