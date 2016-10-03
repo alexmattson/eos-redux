@@ -42,10 +42,13 @@ const flask = (name) => {
     && mkdir ${name} \
     && cd ${name} \
     && echo "${Servers.flask()}" >> ${name}.py \
+    && echo "${Routers.flask()}" >> routes.py \
+    && echo "${Controllers.flask()}" >> controller.py \
     && pip install virtualenv \
     && virtualenv -p python3 venv \
     && source venv/bin/activate \
     && pip install flask \
+    && pip install requests \
     && pip freeze > requirements.txt \
     && deactivate \
   `).on('close', (data) => {

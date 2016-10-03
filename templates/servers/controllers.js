@@ -10,7 +10,15 @@ const express = () => {
 };
 
 const flask = () => {
-  //TODO: implement default flask controller
+  return `def root():
+    return 'ROOT'
+
+def error(code):
+    errors = {
+        404: 'Route Not Found'
+    }
+    text = errors[code]
+    return 'ERROR:  ' + str(code) + '  ' + text`
 };
 
 const Controllers = {

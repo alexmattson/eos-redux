@@ -71,26 +71,27 @@ module.exports = server;`
 
 const flask = () => {
   return `import sys
-from flask import Flask, url_for
+import requests
+from flask import Flask, request
+import routes
+import controller
 
 app = Flask(__name__)
 
-@app.route('/hello')
-def say_hello():
-    return 'Flask server 2 says hello!'
-
 @app.route('/')
 def root():
-    return app.send_static_file('index.html')
+    action = routes.GET['/']
+    response = getattr(controller, action)()
+    return response
 
-@app.route('/<path:path>')
-def static_file(path):
-    mimetype = ''
-    if path.split('.')[1] == 'css':
-        mimetype = 'text/css'
-    if path.split('.')[1] == 'js':
-        mimetype = 'application/javascript'
-    return app.send_static_file(path), 200, {'Content-Type': mimetype}
+@app.route('/<path:path>', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+def send_to_router(path):
+    action = getattr(routes, request.method)['/' + path]
+    if not action:
+        content = getattr(controller, 'error')(404)
+        return content, 404
+    response = getattr(controller, action)()
+    return response
 
 if __name__  == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'development':

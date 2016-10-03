@@ -32,7 +32,16 @@ module.exports = Routes;`
 };
 
 const flask = () => {
-  //TODO: default router for flask
+  return `from collections import defaultdict
+GET = defaultdict(lambda: None)
+POST = defaultdict(lambda: None)
+PATCH_PUT = defaultdict(lambda: None)
+DELETE = defaultdict(lambda: None)
+
+GET['/'] = 'root'
+
+# To add routes:
+# <METHOD>[<route>] = <controller action>`
 };
 
 const Routers = {
