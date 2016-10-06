@@ -5,7 +5,7 @@
 ## Overview
 
 #### Description
-EOS is an npm package that allows you to have a full redux application up and running in only a few lines of code in the console!
+With this package, you can quickly and easily create your React-Redux application with just a few commands in the console. EOS-Redux makes Redux accessible to anyone, allowing you to generate middleware, reducers, or full Redux cycles with a single line of code. Forget copying and pasting every React container you write; generate a container from the command line and guarantee no typos. Enjoy!
 
 #### Vision
 We are a team that strives to make coding simple and efficient, and we are working to make the React-Redux paradigm easier to get up and running and more accessible for everyone!
