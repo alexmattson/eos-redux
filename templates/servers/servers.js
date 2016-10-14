@@ -2,61 +2,54 @@ const express = () => {
   return `const express = require('express');
 const app = express();
 const Routes = require('./routes');
+const Routing = require('eos-redux/utils/routing');
+const Errors = require('/eos-redux/utils/errors');
 const Controller = require('./controller');
 const path = require('path');
 const logger = require('morgan');
 
+const processRequest = function(req){
+  let response;
+  let action;
+  let status;
+  const params = Routing.getParams(Routes[req.method], req.path);
+  if(params){
+    action = Routes[req.method][params.path];
+    response = Controller[action](params.params);
+    status = 200;
+  } else {
+    response = Errors.code(404);
+    status = 404;
+  }
+  return { response: response, status: status };
+}
+
 app.use(logger('dev'));
 app.use(express.static('server/static'));
 
-app.get(/\\/*/, function(req, res){
-  const action = Routes.GET[req.path];
-  if(!action){
-    res.status(404).send('ERROR 404: Route Not Found');
-  } else {
-    response = Controller[action]();
-    res.send(response);
-  }
+app.get(/\/*/, function(req, res){
+  const responseParams = processRequest(req);
+  res.status(responseParams.status).send(responseParams.response);
 });
 
-app.post(/\\/*/, function(req, res){
-  const action = Routes.POST[req.path];
-  if(!action){
-    res.status(404).send('ERROR 404: Route Not Found');
-  } else {
-    response = Controller[action]();
-    res.send(response);
-  }
+app.post(/\/*/, function(req, res){
+  const responseParams = processRequest(req);
+  res.status(responseParams.status).send(responseParams.response);
 });
 
-app.put(/\\/*/, function(req, res){
-  const action = Routes.PUT[req.path];
-  if(!action){
-    res.status(404).send('ERROR 404: Route Not Found');
-  } else {
-    response = Controller[action]();
-    res.send(response);
-  }
+app.put(/\/*/, function(req, res){
+  const responseParams = processRequest(req);
+  res.status(responseParams.status).send(responseParams.response);
 });
 
-app.patch(/\\/*/, function(req, res){
-  const action = Routes.PATCH[req.path];
-  if(!action){
-    res.status(404).send('ERROR 404: Route Not Found');
-  } else {
-    response = Controller[action]();
-    res.send(response);
-  }
+app.patch(/\/*/, function(req, res){
+  const responseParams = processRequest(req);
+  res.status(responseParams.status).send(responseParams.response);
 });
 
-app.delete(/\\/*/, function(req, res){
-  const action = Routes.DELETE[req.path];
-  if(!action){
-    res.status(404).send('ERROR 404: Route Not Found');
-  } else {
-    response = Controller[action]();
-    res.send(response);
-  }
+app.delete(/\/*/, function(req, res){
+  const responseParams = processRequest(req);
+  res.status(responseParams.status).send(responseParams.response);
 });
 
 if (module === require.main) {
