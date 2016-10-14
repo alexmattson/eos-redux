@@ -27,27 +27,27 @@ const processRequest = function(req){
 app.use(logger('dev'));
 app.use(express.static('server/static'));
 
-app.get(/\/*/, function(req, res){
+app.get(/\\/*/, function(req, res){
   const responseParams = processRequest(req);
   res.status(responseParams.status).send(responseParams.response);
 });
 
-app.post(/\/*/, function(req, res){
+app.post(/\\/*/, function(req, res){
   const responseParams = processRequest(req);
   res.status(responseParams.status).send(responseParams.response);
 });
 
-app.put(/\/*/, function(req, res){
+app.put(/\\/*/, function(req, res){
   const responseParams = processRequest(req);
   res.status(responseParams.status).send(responseParams.response);
 });
 
-app.patch(/\/*/, function(req, res){
+app.patch(/\\/*/, function(req, res){
   const responseParams = processRequest(req);
   res.status(responseParams.status).send(responseParams.response);
 });
 
-app.delete(/\/*/, function(req, res){
+app.delete(/\\/*/, function(req, res){
   const responseParams = processRequest(req);
   res.status(responseParams.status).send(responseParams.response);
 });

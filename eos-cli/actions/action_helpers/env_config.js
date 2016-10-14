@@ -14,7 +14,7 @@ const defaultExpress = (path, name) => {
     && echo "${Routers.express()}" >> routes.js \
     && echo "${Controllers.express()}" >> controller.js \
     && npm init --yes \
-    && npm install --save express morgan \
+    && npm install --save express morgan eos-redux \
   `).on('close', (data) => {
     console.log(Util.chalk.blue('Created Express Server'));
     console.log('Installing server dependencies. This could take a few minutes...');
