@@ -65,9 +65,10 @@ module.exports = server;`
 const flask = () => {
   return `import sys
 import requests
-from flask import Flask, request
 import routes
 import controller
+from eos_python_utils import get_params
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -79,12 +80,14 @@ def root():
 
 @app.route('/<path:path>', methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 def send_to_router(path):
-    action = getattr(routes, request.method)['/' + path]
-    if not action:
+    routes_table = routes.routes_for(request.method)
+    params = get_params(routes_table, path)
+    if not params:
         content = getattr(controller, 'error')(404)
         return content, 404
-    response = getattr(controller, action)()
-    return response
+    action = routes_table[params['path']]
+    response = getattr(controller, action)(params['params'])
+    return response, 200
 
 if __name__  == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'development':

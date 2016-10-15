@@ -49,6 +49,7 @@ const flask = (name) => {
     && source venv/bin/activate \
     && pip install flask \
     && pip install requests \
+    && pip install eos_python_utils \
     && pip freeze > requirements.txt \
     && deactivate \
   `).on('close', (data) => {

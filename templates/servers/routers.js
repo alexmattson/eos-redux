@@ -21,13 +21,17 @@ const flask = () => {
   return `from collections import defaultdict
 GET = defaultdict(lambda: None)
 POST = defaultdict(lambda: None)
-PATCH_PUT = defaultdict(lambda: None)
+PATCH = defaultdict(lambda: None)
+PUT = defaultdict(lambda: None)
 DELETE = defaultdict(lambda: None)
 
 GET['/'] = 'root'
 
 # To add routes:
-# <METHOD>[<route>] = <controller action>`
+# <METHOD>[<route>] = <controller action>
+
+def routes_for(method):
+    return globals()[method]`
 };
 
 const Routers = {
