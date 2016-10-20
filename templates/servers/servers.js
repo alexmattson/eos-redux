@@ -89,11 +89,12 @@ def root():
 def send_to_router(path):
     routes_table = routes.routes_for(request.method)
     params = get_params(routes_table, path)
+    data = { 'data': request.get_json(force=True) }
     if not params:
         content = getattr(controller, 'error')(404)
         return content, 404
     action = routes_table[params['path']]
-    response = getattr(controller, action)(params['params'])
+    response = getattr(controller, action)(params['params'], data['data'])
     return response, 200
 
 if __name__  == '__main__':
