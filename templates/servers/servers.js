@@ -3,19 +3,25 @@ const express = () => {
 const app = express();
 const Routes = require('./routes');
 const Routing = require('eos-redux/utils/routing');
-const Errors = require('/eos-redux/utils/errors');
+const Errors = require('eos-redux/utils/errors');
 const Controller = require('./controller');
 const path = require('path');
 const logger = require('morgan');
+const BodyParser = require('body-parser');
 
 const processRequest = function(req){
   let response;
   let action;
   let status;
+  let data = { data: null };
+  if(req.method === 'POST'){
+    console.log(req.body);
+    data = { data: req.body };
+  }
   const params = Routing.getParams(Routes[req.method], req.path);
   if(params){
     action = Routes[req.method][params.path];
-    response = Controller[action](params.params);
+    response = Controller[action](params.params, data.data);
     status = 200;
   } else {
     response = Errors.code(404);
@@ -26,6 +32,7 @@ const processRequest = function(req){
 
 app.use(logger('dev'));
 app.use(express.static('server/static'));
+app.use(BodyParser.json());
 
 app.get(/\\/*/, function(req, res){
   const responseParams = processRequest(req);
