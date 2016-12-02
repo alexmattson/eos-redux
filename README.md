@@ -104,17 +104,6 @@ All the first level dependencies included are:
 * redux
 * webpack
 
-If a backend was generated on start, the following additional dependencies are included:
-
-* body-parser
-* cookie-parser
-* debug
-* express
-* jade
-* morgan
-* serve-favicon
-* ejs
-
 For ease of use we have also included a default webpack.config.js file that is structured correctly for this framework.  
 
 ### <a id="action-generate"></a> Generate
